@@ -1,0 +1,50 @@
+{
+    "compilerOptions": {
+        "target": "es2019",
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "lib": [
+            "es2019"
+        ],
+        "allowJs": true,
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "baseUrl": "./src",
+        "removeComments": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "./src/@types"
+        ],
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "paths": {
+            "@src/*": [
+                "./src/*"
+            ],
+            "@test/*": [
+                "./test/*"
+            ],
+            "@useCases/*": [
+                "useCases/*"
+            ],
+            "@repositories/*": [
+                "repositories/*"
+            ],
+            "@entities/*": [
+                "entities/*"
+            ],
+        },
+        "rootDirs": [
+            "./src",
+            "./test"
+        ],
+    },
+    "include": [
+        "src/**/*.ts",
+        "./test/**/*.ts"
+    ]
+}
