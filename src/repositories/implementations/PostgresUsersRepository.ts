@@ -1,16 +1,19 @@
 import { User } from "@entities/User";
 import { IUsersRepository } from "@repositories/IUsersRepository";
+import { getRepository } from "typeorm";
 
 export class PostgresUsersRepository implements IUsersRepository {
-  private users: User[] = [];
-
   async findByEmail(email: string): Promise<User> {
-    const user = this.users.find((user) => user.email === email);
+    const users = getRepository(User);
+    const user = users.findOne({
+      where: { email }
+    })
 
     return user;
   }
 
-  async save(user: User): Promise<void> {
-    this.users.push(user);
+  async create(user: User): Promise<void> {
+    const users = getRepository(User);
+    users.save(user);
   }
 }

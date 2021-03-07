@@ -5,7 +5,7 @@ import { User } from "@entities/User";
 export class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  async execute(data: ICreateUserRequestDTO): Promise<void> {
+  async execute(data: ICreateUserRequestDTO): Promise<User> {
     const userAlreadyExists = await this.usersRepository.findByEmail(
       data.email
     );
@@ -16,6 +16,8 @@ export class CreateUserUseCase {
 
     const user = new User(data);
 
-    await this.usersRepository.save(user);
+    await this.usersRepository.create(user);
+
+    return user;
   }
 }

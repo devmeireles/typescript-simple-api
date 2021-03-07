@@ -4,8 +4,8 @@ import { CreateUserUseCase } from "./CreateUserUseCase";
 export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
-  async handle(request: Request, response: Response): Promise<Response> {
-    const { name, email, password } = request.body;
+  async handle(req: Request, res: Response): Promise<Response> {
+    const { name, email, password } = req.body;
 
     try {
       const user = await this.createUserUseCase.execute({
@@ -14,9 +14,9 @@ export class CreateUserController {
         password,
       });
 
-      return response.status(201).json(user);
+      return res.status(201).json(user);
     } catch (err) {
-      return response.status(400).json({
+      return res.status(400).json({
         message: err.message || "Unexpected error.",
       });
     }
