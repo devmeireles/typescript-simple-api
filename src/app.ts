@@ -1,7 +1,6 @@
-import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
-import { createConnection } from 'typeorm';
+import { createConnection } from "typeorm";
 import { routes } from "./routes/index";
 
 class App {
