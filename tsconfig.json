@@ -1,26 +1,21 @@
 {
     "compilerOptions": {
-        "target": "es2019",
-        "moduleResolution": "node",
+        "target": "es2017",
         "module": "commonjs",
         "lib": [
-            "es2019"
+            "es6"
         ],
         "allowJs": true,
         "outDir": "./dist",
         "rootDir": "./src",
-        "baseUrl": "./src",
         "removeComments": true,
-        "typeRoots": [
-            "./node_modules/@types",
-            "./src/@types"
-        ],
         "esModuleInterop": true,
         "resolveJsonModule": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
         "paths": {
             "@src/*": [
                 "./src/*"
@@ -29,17 +24,14 @@
                 "./test/*"
             ],
             "@useCases/*": [
-                "useCases/*"
+                "./src/useCases/*"
             ],
             "@repositories/*": [
-                "repositories/*"
+                "./src/repositories/*"
             ],
             "@entities/*": [
-                "entities/*"
-            ],
-            "@config/*": [
-                "config/*"
-            ],
+                "./src/entities/*"
+            ]
         },
         "rootDirs": [
             "./src",
@@ -47,7 +39,11 @@
         ],
     },
     "include": [
-        "src/**/*.ts",
+        "./src/**/*.ts",
         "./test/**/*.ts"
+    ],
+    "exclude": [
+        "./node_modules/*",
+        "dist"
     ]
 }

@@ -1,9 +1,10 @@
+import "module-alias/register";
 import cors from "cors";
 import express from "express";
 import { createConnection } from "typeorm";
 import { routes } from "./routes/index";
 
-class App {
+export class App {
   public app: express.Application;
 
   constructor() {
@@ -18,8 +19,8 @@ class App {
     this.app.use(cors());
   }
 
-  private setDB(): void {
-    createConnection();
+  private async setDB(): Promise<void> {
+    await createConnection();
   }
 
   private setupRoutes(): void {
