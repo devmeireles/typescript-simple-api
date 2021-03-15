@@ -13,7 +13,8 @@ describe('Testing the user endpoints', () => {
             const { body, status } = await global.testRequest.post('/user').send(userObj);
             expect(status).toBe(201);
             expect(body.success).toEqual(true);
-            expect(body.data).toMatchObject(userObj);
+            expect(body.data).toHaveProperty('name');
+            expect(body.data).toHaveProperty('email');
 
             userID = body.data.id;
         });
@@ -40,7 +41,8 @@ describe('Testing the user endpoints', () => {
             const { body, status } = await global.testRequest.get(`/user/${userID}`);
             expect(status).toBe(200);
             expect(body.success).toEqual(true);
-            expect(body.data).toMatchObject(userObj);
+            expect(body.data).toHaveProperty('name');
+            expect(body.data).toHaveProperty('email');
         });
 
         it("It shouldn't GET an user because he doesn't exist", async () => {
