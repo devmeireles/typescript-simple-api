@@ -8,6 +8,7 @@
     "start": "node dist/server.js",
     "start:dev": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
     "test": "jest --projects ./test --runInBand",
+    "test:coverage": "jest --projects ./test --runInBand --coverage",
     "style:fix": "prettier --write 'src/**/*.ts'",
     "lint:fix": "eslint ./src --ext .ts --fix",
     "typeorm": "npx ts-node ./node_modules/typeorm/cli.js"

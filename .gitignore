@@ -3,3 +3,4 @@ dist
 .env
 src/config/database.ts
 ormconfig.json
+test/coverage

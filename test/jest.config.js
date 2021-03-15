@@ -12,5 +12,7 @@ module.exports = {
         displayName: "end2end-tests",
         setupFilesAfterEnv: ["./test/jest.setup.ts"],
         testMatch: ["<rootDir>/test/**/*.test.ts"],
+        coverageDirectory: '<rootDir>/test/coverage',
+        coverageReporters: ["text", "html"]
     }
 }

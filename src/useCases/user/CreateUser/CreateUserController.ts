@@ -14,10 +14,14 @@ export class CreateUserController {
         password,
       });
 
-      return res.status(201).json(user);
+      return res.status(201).json({
+        success: true,
+        data: user
+      });
     } catch (err) {
       return res.status(400).json({
-        message: err.detail || err.message || "Unexpected error.",
+        success: false,
+        message: err.detail || err.message,
       });
     }
   }

@@ -8,17 +8,17 @@ export class UpdateUserController {
     const { id } = req.params;
     const { name, email, password } = req.body;
     try {
-      const user = await this.updateUserUseCase.execute({
+      await this.updateUserUseCase.execute({
         id,
         name,
         email,
         password,
       });
 
-      return res.status(200).json(user);
+      return res.status(204).send();
     } catch (err) {
       return res.status(400).json({
-        message: err.detail || err.message || "Unexpected error.",
+        message: err.detail || err.message,
       });
     }
   }

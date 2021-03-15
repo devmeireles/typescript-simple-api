@@ -4,7 +4,7 @@ import { getRepository } from "typeorm";
 
 export class PostgresUsersRepository implements IUsersRepository {
   async findByEmail(email: string): Promise<User> {
-    const user = await getRepository(User).findOneOrFail({
+    const user = await getRepository(User).findOne({
       where: { email },
     });
 
@@ -12,7 +12,7 @@ export class PostgresUsersRepository implements IUsersRepository {
   }
 
   async findByID(id: string): Promise<User> {
-    const user = await getRepository(User).findOneOrFail({
+    const user = await getRepository(User).findOne({
       where: { id },
     });
 
