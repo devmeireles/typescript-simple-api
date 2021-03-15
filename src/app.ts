@@ -25,6 +25,7 @@ export class App {
 
   private setupRoutes(): void {
     this.app.use(routes.userRouter);
+    this.app.use("/auth", routes.authRouter);
     this.app.use(routes.productRouter);
   }
 }

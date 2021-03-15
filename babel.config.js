@@ -18,7 +18,9 @@ module.exports = {
                 '@config': './src/config',
                 '@entities': './src/entities',
                 '@repositories': './src/repositories',
-                '@useCases': './src/useCases'
+                '@useCases': './src/useCases',
+                '@utils': './src/utils',
+                '@interfaces': './src/interfaces'
             }
         }],
         ["@babel/plugin-proposal-decorators", { "legacy": true }],

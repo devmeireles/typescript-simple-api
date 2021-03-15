@@ -1,6 +1,12 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { uuid } from "uuidv4";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 
 @Entity("users")
 export class User {
@@ -13,7 +19,7 @@ export class User {
   @Column("varchar")
   public email!: string;
 
-  @Column("varchar", { select: false })
+  @Column("varchar")
   public password!: string;
 
   constructor(props: Omit<User, "id">, id?: string) {
@@ -30,5 +36,9 @@ export class User {
     if (this.password) {
       this.password = await bcrypt.hash(this.password, 10);
     }
+  }
+
+  async compareHash(unencryptedPassword: string): Promise<boolean> {
+    return bcrypt.compareSync(unencryptedPassword, this.password);
   }
 }

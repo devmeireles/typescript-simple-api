@@ -31,6 +31,12 @@
             ],
             "@entities/*": [
                 "./src/entities/*"
+            ],
+            "@config/*": [
+                "./src/config/*"
+            ],
+            "@utils/*": [
+                "./src/utils/*"
             ]
         },
         "rootDirs": [
