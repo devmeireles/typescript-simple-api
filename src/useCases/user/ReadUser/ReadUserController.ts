@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { ReadUserUseCase } from "./ReadUserUseCase";
 
 export class ReadUserController {
-  constructor(private readUserUseCase: ReadUserUseCase) { }
+  constructor(private readUserUseCase: ReadUserUseCase) {}
 
   async handle(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
@@ -12,7 +12,7 @@ export class ReadUserController {
 
       return res.status(200).json({
         success: true,
-        data: user
+        data: user,
       });
     } catch (err) {
       return res.status(400).json({

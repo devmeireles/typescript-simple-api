@@ -16,7 +16,7 @@ export class CreateUserController {
 
       return res.status(201).json({
         success: true,
-        data: user
+        data: user,
       });
     } catch (err) {
       return res.status(400).json({
