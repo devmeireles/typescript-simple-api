@@ -1,6 +1,5 @@
 const { resolve } = require('path');
 const root = resolve(__dirname);
-console.log(root);
 module.exports = {
     rootDir: root,
     displayName: 'root-tests',
