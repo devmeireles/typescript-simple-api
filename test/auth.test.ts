@@ -4,12 +4,12 @@ describe('Testing the auth endpoints', () => {
 
     const userObj = {
         name: "Gabriel dos Santos Meireles",
-        email: "gabriel@flextore.com",
+        email: "costumer@flextore.com",
         password: "strongPassw0rd!"
     };
 
     const loginObj = {
-        email: "gabriel@flextore.com",
+        email: "costumer@flextore.com",
         password: "strongPassw0rd!"
     };
 
@@ -19,8 +19,8 @@ describe('Testing the auth endpoints', () => {
     };
 
     const wrongPasswordObj = {
-        email: "gabriel@flextore.com",
-        password: "strongPassw0rd!x"
+        email: "costumer@flextore.com",
+        password: "12strongPassw0rd!x"
     };
 
     describe('POST /login', () => {
@@ -45,7 +45,7 @@ describe('Testing the auth endpoints', () => {
 
         it("It shouldn't login because the body is empty", async () => {
             const loginObj = {};
-            const { body, status } = await global.testRequest.post('/user').send(loginObj);
+            const { body, status } = await global.testRequest.post('/auth/login').send(loginObj);
             expect(status).toBe(400);
             expect(body.success).toEqual(false);
             expect(body).not.toHaveProperty('data');
@@ -53,7 +53,7 @@ describe('Testing the auth endpoints', () => {
         });
 
         it("It shouldn't login because the email is wrong", async () => {
-            const { body, status } = await global.testRequest.post('/user').send(wrongLoginMailObj);
+            const { body, status } = await global.testRequest.post('/auth/login').send(wrongLoginMailObj);
             expect(status).toBe(400);
             expect(body.success).toEqual(false);
             expect(body).not.toHaveProperty('data');
@@ -61,7 +61,7 @@ describe('Testing the auth endpoints', () => {
         });
 
         it("It shouldn't login because the password is wrong", async () => {
-            const { body, status } = await global.testRequest.post('/user').send(wrongPasswordObj);
+            const { body, status } = await global.testRequest.post('/auth/login').send(wrongPasswordObj);
             expect(status).toBe(400);
             expect(body.success).toEqual(false);
             expect(body).not.toHaveProperty('data');

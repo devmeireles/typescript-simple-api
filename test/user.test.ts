@@ -11,7 +11,6 @@ describe('Testing the user endpoints', () => {
     describe('POST /', () => {
         it('It should POST an user', async () => {
             const { body, status } = await global.testRequest.post('/user').send(userObj);
-            console.log(body);
             expect(status).toBe(201);
             expect(body.success).toEqual(true);
             expect(body.data).toHaveProperty('name');
