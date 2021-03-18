@@ -3,12 +3,15 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { uuid } from "uuidv4";
+import { v4 as uuid } from "uuid";
 import bcrypt from "bcryptjs";
+import { Store } from "./Store";
 
-@Entity("users")
+@Entity("user")
 export class User {
   @PrimaryGeneratedColumn("uuid")
   public readonly id!: string;
@@ -16,11 +19,18 @@ export class User {
   @Column("varchar")
   public name!: string;
 
-  @Column("varchar")
+  @Column("varchar", { unique: true})
   public email!: string;
 
   @Column("varchar")
   public password!: string;
+
+  @Column("boolean", { default: false })
+  public active!: boolean;
+
+  @OneToOne(() => Store)
+  @JoinColumn()
+  public store!: Store;
 
   constructor(props: Omit<User, "id">, id?: string) {
     Object.assign(this, props);
