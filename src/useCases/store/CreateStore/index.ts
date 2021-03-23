@@ -1,10 +1,12 @@
 import { PostgresStoreRepository } from "@repositories/implementations/PostgresStoreRepository";
+import { PostgresUserRepository } from "@repositories/implementations/PostgresUserRepository";
 import { CreateStoreController } from "./CreateStoreController";
 import { CreateStoreUseCase } from "./CreateStoreUseCase";
 
-const postgresStoreRepository = new PostgresStoreRepository();
+const storeRepository = new PostgresStoreRepository();
+const userRepository = new PostgresUserRepository();
 
-const createStoreUseCase = new CreateStoreUseCase(postgresStoreRepository);
+const createStoreUseCase = new CreateStoreUseCase(storeRepository, userRepository);
 
 const createStoreController = new CreateStoreController(createStoreUseCase);
 

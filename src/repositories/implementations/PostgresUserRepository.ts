@@ -1,8 +1,8 @@
 import { User } from "@entities/User";
-import { IUsersRepository } from "@repositories/IUsersRepository";
+import { IUserRepository } from "@src/repositories/IUserRepository";
 import { getRepository } from "typeorm";
 
-export class PostgresUsersRepository implements IUsersRepository {
+export class PostgresUserRepository implements IUserRepository {
   async findByEmail(email: string): Promise<User> {
     const user = await getRepository(User).findOne({
       where: { email },

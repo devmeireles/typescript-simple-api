@@ -1,12 +1,12 @@
 import { ILoggedUser } from "@src/interfaces/ILoggedUser";
-import { IUsersRepository } from "@src/repositories/IUsersRepository";
+import { IUserRepository } from "@src/repositories/IUserRepository";
 import { AuthToken } from "@utils/AuthToken";
 
 export class LoginUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(private userRepository: IUserRepository) {}
 
   async execute(email: string, password: string): Promise<ILoggedUser> {
-    const currentUser = await this.usersRepository.findByEmail(email);
+    const currentUser = await this.userRepository.findByEmail(email);
 
     if (!currentUser) {
       throw new Error("User not found");

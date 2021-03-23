@@ -3,6 +3,7 @@ import cors from "cors";
 import express from "express";
 import { createConnection } from "typeorm";
 import { routes } from "./routes/index";
+import databaseConfig from "./config/database";
 
 export class App {
   public app: express.Application;
@@ -20,7 +21,7 @@ export class App {
   }
 
   private async setDB(): Promise<void> {
-    await createConnection();
+    await createConnection(databaseConfig);
   }
 
   private setupRoutes(): void {

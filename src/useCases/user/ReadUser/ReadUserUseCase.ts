@@ -1,11 +1,11 @@
 import { User } from "@entities/User";
-import { IUsersRepository } from "@repositories/IUsersRepository";
+import { IUserRepository } from "@src/repositories/IUserRepository";
 
 export class ReadUserUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(private userRepository: IUserRepository) {}
 
   async execute(id: string): Promise<User> {
-    const currentUser = await this.usersRepository.findByID(id);
+    const currentUser = await this.userRepository.findByID(id);
 
     if (!currentUser) {
       throw new Error("User does not exist");

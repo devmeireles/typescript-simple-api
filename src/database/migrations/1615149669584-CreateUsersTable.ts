@@ -28,6 +28,11 @@ export class CreateUsersTable1615149669584 implements MigrationInterface {
             type: "varchar",
           },
           {
+            name: "language",
+            type: "varchar",
+            default: "'en'",
+          },
+          {
             name: "active",
             type: "boolean",
             default: false

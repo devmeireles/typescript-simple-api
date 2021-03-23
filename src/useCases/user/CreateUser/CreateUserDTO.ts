@@ -4,7 +4,8 @@ export interface ICreateUserRequestDTO {
   name: string;
   email: string;
   password: string;
-  active: boolean;
+  active?: boolean;
+  language?: string;
   store?: Store;
   readonly hashPassword?;
   readonly compareHash?;

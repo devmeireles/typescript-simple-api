@@ -1,10 +1,10 @@
-import { PostgresUsersRepository } from "@repositories/implementations/PostgresUsersRepository";
+import { PostgresUserRepository } from "@repositories/implementations/PostgresUserRepository";
 import { ReadUserController } from "./ReadUserController";
 import { ReadUserUseCase } from "./ReadUserUseCase";
 
-const postgresUsersRepository = new PostgresUsersRepository();
+const userRepository = new PostgresUserRepository();
 
-const readUserUseCase = new ReadUserUseCase(postgresUsersRepository);
+const readUserUseCase = new ReadUserUseCase(userRepository);
 
 const readUserController = new ReadUserController(readUserUseCase);
 

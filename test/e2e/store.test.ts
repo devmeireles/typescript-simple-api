@@ -15,6 +15,12 @@ describe('Testing the store endpoints', () => {
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
     }
 
+    const wrongStoreObj = {
+        owner_id: wrongUserID,
+        name: 'New Costumer Shop',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
+    }
+
     it('It should POST an user', async () => {
         const { body, status } = await global.testRequest.post('/user').send(userObj);
         expect(status).toBe(201);
@@ -46,4 +52,13 @@ describe('Testing the store endpoints', () => {
         });
     });
 
+    describe('POST /', () => {
+        it("It shouldn't POST an store because the user doesn't exist", async () => {
+            const { body, status } = await global.testRequest.post('/store').send(wrongStoreObj);
+
+            expect(status).toBe(400);
+            expect(body.success).toEqual(false);
+            expect(body).not.toHaveProperty('data');
+        });
+    });
 });
