@@ -25,6 +25,7 @@ export class LoginUseCase {
 
     const loggedUser: ILoggedUser = {
       name: currentUser.name,
+      id: currentUser.id,
       email: currentUser.email,
       token,
     };
