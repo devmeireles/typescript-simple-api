@@ -19,13 +19,13 @@ export class User {
   @Column("varchar")
   public name!: string;
 
-  @Column("varchar", { unique: true})
+  @Column("varchar", { unique: true })
   public email!: string;
 
   @Column("varchar")
   public password!: string;
 
-  @Column("varchar", { default: 'en' })
+  @Column("varchar", { default: "en" })
   public language?: string;
 
   @Column("boolean", { default: false })

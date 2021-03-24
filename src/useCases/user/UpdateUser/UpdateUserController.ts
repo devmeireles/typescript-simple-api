@@ -13,7 +13,7 @@ export class UpdateUserController {
         name,
         email,
         password,
-        language
+        language,
       });
 
       return res.status(204).send();

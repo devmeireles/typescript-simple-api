@@ -12,7 +12,7 @@ export class CreateUserController {
         name,
         email,
         password,
-        language
+        language,
       });
 
       return res.status(201).json({

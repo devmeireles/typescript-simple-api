@@ -6,8 +6,11 @@ import { CreateStoreUseCase } from "./CreateStoreUseCase";
 const storeRepository = new PostgresStoreRepository();
 const userRepository = new PostgresUserRepository();
 
-const createStoreUseCase = new CreateStoreUseCase(storeRepository, userRepository);
+const createStoreUseCase = new CreateStoreUseCase(
+  storeRepository,
+  userRepository
+);
 
 const createStoreController = new CreateStoreController(createStoreUseCase);
 
-export { createStoreUseCase, createStoreController }
+export { createStoreUseCase, createStoreController };
