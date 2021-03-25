@@ -1,6 +1,7 @@
-describe('Testing the store endpoints', () => {
+describe('Testing the product endpoints', () => {
 
     let userID: string = null;
+    const storeID: string = null;
     let token: string = null;
     const wrongUserID = '51458c1f-ce6b-483c-aa39-f13d8c3011ff';
     const wrongToken = 'wrongTOkenInformati0n';
@@ -22,10 +23,11 @@ describe('Testing the store endpoints', () => {
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
     }
 
-    const wrongStoreObj = {
-        owner_id: wrongUserID,
-        name: 'New Costumer Shop',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
+    const productObj = {
+        owner_id: userID,
+        store_id: storeID,
+        name: 'New Nice T-shirt',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
     }
 
     it('It should POST an user', async () => {
@@ -37,6 +39,7 @@ describe('Testing the store endpoints', () => {
 
         userID = body.data.id;
         storeObj.owner_id = userID;
+        productObj.owner_id = userID;
     });
 
     it('It should do the login action and return a jwt', async () => {
@@ -58,39 +61,25 @@ describe('Testing the store endpoints', () => {
             expect(body.data).toHaveProperty('name');
             expect(body.data).toHaveProperty('id');
             expect(body.data).toHaveProperty('description');
+
+            productObj.store_id = body.data.id;
         });
     });
 
     describe('POST /', () => {
-        it("It shouldn't POST a store because the body is empty", async () => {
-            const { body, status } = await global.testRequest.post('/store').send({}).set({'authorization': token});
-            expect(status).toBe(400);
-            expect(body.success).toEqual(false);
-            expect(body).not.toHaveProperty('data');
+        it('It should POST a product', async () => {
+            const { body, status } = await global.testRequest.post('/product').send(productObj).set({ 'authorization': token });
+            expect(status).toBe(201);
+            expect(body.success).toEqual(true);
+            expect(body.data).toHaveProperty('name');
+            expect(body.data).toHaveProperty('id');
+            expect(body.data).toHaveProperty('description');
         });
     });
 
     describe('POST /', () => {
-        it("It shouldn't POST a store because the user doesn't exist", async () => {
-            const { body, status } = await global.testRequest.post('/store').send(wrongStoreObj).set({'authorization': token});
-            expect(status).toBe(400);
-            expect(body.success).toEqual(false);
-            expect(body).not.toHaveProperty('data');
-        });
-    });
-
-    describe('POST /', () => {
-        it("It shouldn't POST a store because the authorization header is missing", async () => {
-            const { body, status } = await global.testRequest.post('/store').send(storeObj);
-            expect(status).toBe(401);
-            expect(body.success).toEqual(false);
-            expect(body).not.toHaveProperty('data');
-        });
-    });
-
-    describe('POST /', () => {
-        it("It shouldn't POST a store because the authorization header is wrong", async () => {
-            const { body, status } = await global.testRequest.post('/store').send(storeObj).set({'authorization': wrongToken});
+        it("It shouldn't POST a product because the authorization header is wrong", async () => {
+            const { body, status } = await global.testRequest.post('/product').send(productObj).set({'authorization': wrongToken});
             expect(status).toBe(401);
             expect(body.success).toEqual(false);
             expect(body).not.toHaveProperty('data');
