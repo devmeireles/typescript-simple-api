@@ -14,8 +14,6 @@ export class CreateUserUseCase {
 
     const user = new User(data);
 
-    await this.userRepository.create(user);
-
-    return user;
+    return await this.userRepository.create(user);
   }
 }

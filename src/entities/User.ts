@@ -28,6 +28,9 @@ export class User {
   @Column("varchar", { default: "en" })
   public language?: string;
 
+  @Column("varchar", { default: "FREE" })
+  public account_type?: string;
+
   @Column("boolean", { default: false })
   public active?: boolean;
 

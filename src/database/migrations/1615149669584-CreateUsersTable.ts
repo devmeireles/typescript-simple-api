@@ -32,6 +32,11 @@ export class CreateUsersTable1615149669584 implements MigrationInterface {
             default: "'en'",
           },
           {
+            name: "account_type",
+            type: "varchar",
+            default: "'FREE'",
+          },
+          {
             name: "active",
             type: "boolean",
             default: false,

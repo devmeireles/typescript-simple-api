@@ -19,8 +19,8 @@ export class PostgresUserRepository implements IUserRepository {
     return user;
   }
 
-  async create(user: User): Promise<void> {
-    await getRepository(User).save(user);
+  async create(user: User): Promise<User> {
+    return await getRepository(User).save(user);
   }
 
   async updateOne(id: string, user: User): Promise<User> {
