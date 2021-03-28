@@ -46,16 +46,16 @@ export class CreateStoreTable1616078244041 implements MigrationInterface {
           },
           {
             name: "created_at",
-            type: "timestamp"
+            type: "timestamp",
           },
           {
             name: "deleted_at",
-            type: "timestamp"
+            type: "timestamp",
           },
           {
             name: "updated_at",
-            type: "timestamp"
-          }
+            type: "timestamp",
+          },
         ],
       })
     );

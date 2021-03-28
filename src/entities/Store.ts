@@ -1,4 +1,11 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { v4 as uuid } from "uuid";
 
 @Entity("store")
@@ -22,13 +29,13 @@ export class Store {
   public active?: boolean;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at?: Date;
 
   @DeleteDateColumn()
-  deleted_at: Date;
+  deleted_at?: Date;
 
   constructor(props: Omit<Store, "id">, id?: string) {
     Object.assign(this, props);

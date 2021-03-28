@@ -26,9 +26,7 @@ export class CreateStoreUseCase {
       throw new Error("This user already has a store.");
     }
 
-    const storeSlugAlreadyExists = await this.storeRepository.findBySlug(
-      slug
-    );
+    const storeSlugAlreadyExists = await this.storeRepository.findBySlug(slug);
 
     if (storeSlugAlreadyExists) {
       throw new Error("This slug already is in use.");

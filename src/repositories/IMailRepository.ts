@@ -3,7 +3,7 @@ interface IAddress {
   name: string;
 }
 
-type IMailType = "CREATE_ACCOUNT" | "RESET_PASSWORD"
+type IMailType = "CREATE_ACCOUNT" | "RESET_PASSWORD";
 
 export interface IMessage {
   to: IAddress;

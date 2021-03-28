@@ -1,6 +1,6 @@
 import "module-alias/register";
 import cors from "cors";
-import env from 'dotenv';
+import env from "dotenv";
 import express from "express";
 import { createConnection } from "typeorm";
 import { routes } from "./routes/index";
