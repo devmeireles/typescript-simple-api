@@ -4,4 +4,7 @@ export interface ICreateStoreDTO {
   description?: string;
   owner_id: string;
   active?: boolean;
+  created_at?: Date;
+  updated_at?: Date;
+  deleted_at?: Date;
 }

@@ -2,10 +2,13 @@ import {
   BeforeInsert,
   BeforeUpdate,
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import bcrypt from "bcryptjs";
@@ -33,6 +36,15 @@ export class User {
 
   @Column("boolean", { default: false })
   public active?: boolean;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @DeleteDateColumn()
+  deleted_at: Date;
 
   @OneToOne(() => Store)
   @JoinColumn()

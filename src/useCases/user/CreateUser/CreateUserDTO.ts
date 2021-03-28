@@ -7,6 +7,9 @@ export interface ICreateUserRequestDTO {
   active?: boolean;
   language?: string;
   store?: Store;
+  created_at?: Date;
+  updated_at?: Date;
+  deleted_at?: Date;
   readonly hashPassword?;
   readonly compareHash?;
 }

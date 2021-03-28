@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
 
 @Entity("product")
@@ -17,6 +17,15 @@ export class Product {
 
   @Column("boolean", { default: true })
   public active?: boolean;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @DeleteDateColumn()
+  deleted_at: Date;
 
   constructor(props: Omit<Product, "id">, id?: string) {
     Object.assign(this, props);
