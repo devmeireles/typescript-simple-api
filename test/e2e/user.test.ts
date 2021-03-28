@@ -4,7 +4,7 @@ describe('Testing the user endpoints', () => {
 
     const userObj = {
         name: "Gabriel dos Santos Meireles",
-        email: "gabriel@flextore.com",
+        email: "dev.meireles@gmail.com",
         password: "strongPassw0rd!",
         language: "en"
     }
