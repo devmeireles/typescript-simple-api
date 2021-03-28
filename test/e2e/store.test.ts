@@ -6,7 +6,7 @@ describe('Testing the store endpoints', () => {
     const wrongToken = 'wrongTOkenInformati0n';
 
     const userObj = {
-        name: "Gabriel dos Santos Meireles",
+        name: "Gabriel Meireles",
         email: "newcostumer@flextore.com",
         password: "strongPassw0rd!"
     };
@@ -19,12 +19,14 @@ describe('Testing the store endpoints', () => {
     const storeObj = {
         owner_id: userID,
         name: 'New Costumer Shop',
+        slug: 'newcostumershop',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
     }
 
     const wrongStoreObj = {
         owner_id: wrongUserID,
-        name: 'New Costumer Shop',
+        name: 'Sports Shop',
+        slug: 'sportsshop',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
     }
 

@@ -11,6 +11,14 @@ export class PostgresStoreRepository implements IStoreRepository {
     return store;
   }
 
+  async findBySlug(slug: string): Promise<Store> {
+    const store = await getRepository(Store).findOne({
+      where: { slug },
+    });
+
+    return store;
+  }
+
   async create(store: Store): Promise<void> {
     await getRepository(Store).save(store);
   }

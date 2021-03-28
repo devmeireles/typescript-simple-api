@@ -9,6 +9,9 @@ export class Store {
   @Column("varchar")
   public name!: string;
 
+  @Column("varchar", { unique: true, nullable: false })
+  public slug!: string;
+
   @Column("varchar", { nullable: true })
   public description?: string;
 

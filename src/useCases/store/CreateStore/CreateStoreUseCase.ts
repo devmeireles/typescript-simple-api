@@ -10,7 +10,7 @@ export class CreateStoreUseCase {
   ) {}
 
   async execute(data: ICreateStoreDTO): Promise<Store> {
-    const { owner_id } = data;
+    const { owner_id, slug } = data;
 
     const userExists = await this.userRepository.findByID(owner_id);
 
@@ -24,6 +24,14 @@ export class CreateStoreUseCase {
 
     if (storeAlreadyExists) {
       throw new Error("This user already has a store.");
+    }
+
+    const storeSlugAlreadyExists = await this.storeRepository.findBySlug(
+      slug
+    );
+
+    if (storeSlugAlreadyExists) {
+      throw new Error("This slug already is in use.");
     }
 
     const store = new Store(data);

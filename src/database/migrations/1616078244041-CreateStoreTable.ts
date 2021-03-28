@@ -24,6 +24,12 @@ export class CreateStoreTable1616078244041 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: "slug",
+            type: "varchar",
+            isNullable: false,
+            isUnique: true,
+          },
+          {
             name: "description",
             type: "varchar",
             isNullable: true,
@@ -42,15 +48,14 @@ export class CreateStoreTable1616078244041 implements MigrationInterface {
       })
     );
 
-    await queryRunner.createForeignKey(
-      "store",
-      new TableForeignKey({
-        columnNames: ["owner_id"],
-        referencedColumnNames: ["id"],
-        referencedTableName: "user",
-        onDelete: "CASCADE",
-      })
-    );
+    // await queryRunner.createForeignKey(
+    //   "store",
+    //   new TableForeignKey({
+    //     columnNames: ["owner_id"],
+    //     referencedColumnNames: ["id"],
+    //     referencedTableName: "user"
+    //   })
+    // );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
