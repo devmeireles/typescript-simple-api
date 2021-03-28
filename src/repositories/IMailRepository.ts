@@ -7,8 +7,6 @@ type IMailType = "CREATE_ACCOUNT" | "RESET_PASSWORD"
 
 export interface IMessage {
   to: IAddress;
-  subject: string;
-  body: string;
 }
 
 export interface IMailRepository {

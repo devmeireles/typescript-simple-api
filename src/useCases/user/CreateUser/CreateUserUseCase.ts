@@ -24,9 +24,7 @@ export class CreateUserUseCase {
       to: {
         name: data.name,
         email: data.email,
-      },
-      subject: 'Seja bem-vindo à plataforma',
-      body: '<p>Você já pode fazer login em nossa plataforma.</p>'
+      }
     }, "CREATE_ACCOUNT");
 
     return newUser;
