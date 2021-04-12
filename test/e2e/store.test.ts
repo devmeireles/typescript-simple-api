@@ -1,5 +1,6 @@
 describe('Testing the store endpoints', () => {
 
+    let storeID: string = null;
     let userID: string = null;
     let token: string = null;
     const wrongUserID = '51458c1f-ce6b-483c-aa39-f13d8c3011ff';
@@ -63,6 +64,8 @@ describe('Testing the store endpoints', () => {
             expect(body.data).toHaveProperty('name');
             expect(body.data).toHaveProperty('id');
             expect(body.data).toHaveProperty('description');
+
+            storeID = body.data.id;
         });
 
 
@@ -92,6 +95,15 @@ describe('Testing the store endpoints', () => {
             expect(status).toBe(401);
             expect(body.success).toEqual(false);
             expect(body).not.toHaveProperty('data');
+        });
+    });
+
+    describe('PUT /', () => {
+        it('It should PUT a store', async () => {
+            const { body, status } = await global.testRequest.put(`/store/${storeID}`).send(storeObj).set({ 'authorization': token });
+            expect(status).toBe(204);
+            expect(body).not.toHaveProperty('data');
+            expect(body).not.toHaveProperty('message');
         });
     });
 });

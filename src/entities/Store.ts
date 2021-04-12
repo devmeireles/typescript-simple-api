@@ -23,7 +23,7 @@ export class Store {
   public description?: string;
 
   @Column("varchar")
-  public owner_id!: string;
+  public owner_id?: string;
 
   @Column("boolean", { default: true })
   public active?: boolean;
