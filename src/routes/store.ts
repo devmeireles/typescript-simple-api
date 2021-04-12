@@ -1,4 +1,4 @@
-import checkJWT from "../middlewares/checkJWT";
+import checkJWT from "@middlewares/checkJWT";
 import { createStoreController } from "@useCases/store/CreateStore";
 import { Router, Request, Response } from "express";
 import { validateStore } from "@useCases/store/CreateStore/CreateStoreValidation";

@@ -17,5 +17,6 @@ module.exports = {
         '@entities/(.*)': '<rootDir>/src/entities/$1',
         '@utils/(.*)': '<rootDir>/src/utils/$1',
         '@interfaces/(.*)': '<rootDir>/src/interfaces/$1',
+        '@middlewares/(.*)': '<rootDir>/src/middlewares/$1',
     },
 };

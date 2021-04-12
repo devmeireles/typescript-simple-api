@@ -1,5 +1,6 @@
 describe('Testing the user endpoints', () => {
     let userID: string = null;
+    let token: string = null;
     const wrongUserID = '51458c1f-ce6b-483c-aa39-f13d8c3011ff';
 
     const userObj = {
@@ -7,6 +8,11 @@ describe('Testing the user endpoints', () => {
         email: "dev.meireles@gmail.com",
         password: "strongPassw0rd!",
         language: "en"
+    }
+
+    const loginObj = {
+        email: "dev.meireles@gmail.com",
+        password: "strongPassw0rd!",
     }
 
     describe('POST /', () => {
@@ -34,6 +40,17 @@ describe('Testing the user endpoints', () => {
             expect(body.success).toEqual(false);
             expect(body).not.toHaveProperty('data');
             expect(body).toHaveProperty('message');
+        });
+
+        it('It should do the login action and return a jwt', async () => {
+            const { body, status } = await global.testRequest.post('/auth/login').send(loginObj);
+            expect(status).toBe(200);
+            expect(body.success).toEqual(true);
+            expect(body.data).toHaveProperty('name');
+            expect(body.data).toHaveProperty('email');
+            expect(body.data).toHaveProperty('token');
+    
+            token = body.data.token;
         });
     });
 
@@ -65,24 +82,31 @@ describe('Testing the user endpoints', () => {
     describe('PUT /', () => {
         it('It should PUT an user by ID', async () => {
             userObj.password = 'aNewStrongPassw0rd!';
-            const { body, status } = await global.testRequest.put(`/user/${userID}`).send(userObj);
+            const { body, status } = await global.testRequest.put(`/user/${userID}`).send(userObj).set({'authorization': token});
             expect(status).toBe(204);
             expect(body).not.toHaveProperty('data');
             expect(body).not.toHaveProperty('message');
         });
 
         it("It shouldn't PUT an user by ID because the body is empty", async () => {
-            const { body, status } = await global.testRequest.put(`/user/${userID}`);
+            const { body, status } = await global.testRequest.put(`/user/${userID}`).set({'authorization': token});
             expect(status).toBe(400);
             expect(body).not.toHaveProperty('data');
             expect(body).toHaveProperty('message');
         });
 
         it("It shouldn't PUT an user by ID because he doesn't exist", async () => {
-            const { body, status } = await global.testRequest.put(`/user/${wrongUserID}`);
+            const { body, status } = await global.testRequest.put(`/user/${wrongUserID}`).set({'authorization': token});
             expect(status).toBe(400);
             expect(body).not.toHaveProperty('data');
             expect(body).toHaveProperty('message');
+        });
+
+        it("It shouldn't PUT an user because the body is empty", async () => {
+            const { body, status } = await global.testRequest.put(`/user/${userID}`).send({}).set({'authorization': token});
+            expect(status).toBe(400);
+            expect(body).toHaveProperty('message');
+            expect(body).not.toHaveProperty('data');
         });
     });
 });
