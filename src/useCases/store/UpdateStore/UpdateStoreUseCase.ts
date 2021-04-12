@@ -3,19 +3,19 @@ import { Store } from "@entities/Store";
 import { IUpdateStoreDTO } from "./UpdateStoreDTO";
 
 export class UpdateStoreUseCase {
-    constructor(private storeRepository: IStoreRepository) { }
+  constructor(private storeRepository: IStoreRepository) {}
 
-    async execute(data: IUpdateStoreDTO): Promise<Store> {
-        const { id } = data;
+  async execute(data: IUpdateStoreDTO): Promise<Store> {
+    const { id } = data;
 
-        const currentStore = await this.storeRepository.findByID(id);
+    const currentStore = await this.storeRepository.findByID(id);
 
-        if (!currentStore) {
-            throw new Error("Store does not exist");
-        }
-
-        const store = await this.storeRepository.updateOne(id, data);
-
-        return store;
+    if (!currentStore) {
+      throw new Error("Store does not exist");
     }
+
+    const store = await this.storeRepository.updateOne(id, data);
+
+    return store;
+  }
 }

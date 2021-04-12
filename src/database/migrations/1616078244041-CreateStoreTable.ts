@@ -1,9 +1,4 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableForeignKey,
-} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateStoreTable1616078244041 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -59,15 +54,6 @@ export class CreateStoreTable1616078244041 implements MigrationInterface {
         ],
       })
     );
-
-    // await queryRunner.createForeignKey(
-    //   "store",
-    //   new TableForeignKey({
-    //     columnNames: ["owner_id"],
-    //     referencedColumnNames: ["id"],
-    //     referencedTableName: "user"
-    //   })
-    // );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
