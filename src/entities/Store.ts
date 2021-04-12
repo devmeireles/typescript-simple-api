@@ -13,7 +13,7 @@ export class Store {
   @PrimaryGeneratedColumn("uuid")
   public readonly id!: string;
 
-  @Column("varchar")
+  @Column("varchar", { nullable: false })
   public name!: string;
 
   @Column("varchar", { unique: true, nullable: false })

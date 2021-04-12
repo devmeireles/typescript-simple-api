@@ -19,14 +19,17 @@ describe('Testing the store endpoints', () => {
     const storeObj = {
         owner_id: userID,
         name: 'New Costumer Shop',
-        slug: 'newcostumershop',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
     }
 
     const wrongStoreObj = {
         owner_id: wrongUserID,
-        name: 'Sports Shop',
-        slug: 'sportsshop',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
+    }
+
+    const wrongStoreUserObj = {
+        owner_id: wrongUserID,
+        name: 'New Shop',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
     }
 
@@ -66,7 +69,7 @@ describe('Testing the store endpoints', () => {
     describe('POST /', () => {
         it("It shouldn't POST a store because the body is empty", async () => {
             const { body, status } = await global.testRequest.post('/store').send({}).set({'authorization': token});
-            expect(status).toBe(400);
+            expect(status).toBe(422);
             expect(body.success).toEqual(false);
             expect(body).not.toHaveProperty('data');
         });
@@ -74,7 +77,7 @@ describe('Testing the store endpoints', () => {
 
     describe('POST /', () => {
         it("It shouldn't POST a store because the user doesn't exist", async () => {
-            const { body, status } = await global.testRequest.post('/store').send(wrongStoreObj).set({'authorization': token});
+            const { body, status } = await global.testRequest.post('/store').send(wrongStoreUserObj).set({'authorization': token});
             expect(status).toBe(400);
             expect(body.success).toEqual(false);
             expect(body).not.toHaveProperty('data');
