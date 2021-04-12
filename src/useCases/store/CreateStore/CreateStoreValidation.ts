@@ -20,7 +20,7 @@ export const validateStore =
             .isEmpty()
             .withMessage('The store must belong to a user')
             .bail(),
-        (req: Request, res: Response, next: NextFunction) => {
+        (req: Request, res: Response, next: NextFunction): Response => {
             const errors = validationResult(req);
             if (!errors.isEmpty()) return res.status(422).json({ success: false, errors: errors.array() });
             next();
