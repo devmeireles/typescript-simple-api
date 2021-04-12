@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { CreateStoreUseCase } from "./CreateStoreUseCase";
-import { Slugfy } from '@utils/Slugfy';
+import { Slugfy } from "@utils/Slugfy";
 
 export class CreateStoreController {
   constructor(private createStoreUseCase: CreateStoreUseCase) {}
@@ -8,7 +8,7 @@ export class CreateStoreController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { name, description, owner_id } = req.body;
 
-    const slug: string = new Slugfy().slug(name)
+    const slug: string = new Slugfy().slug(name);
 
     try {
       const store = await this.createStoreUseCase.execute({

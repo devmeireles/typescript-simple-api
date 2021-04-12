@@ -5,8 +5,13 @@ import { validateStore } from "@useCases/store/CreateStore/CreateStoreValidation
 
 const storeRouter = Router();
 
-storeRouter.post("/", [checkJWT], validateStore, (req: Request, res: Response) => {
-  return createStoreController.handle(req, res);
-});
+storeRouter.post(
+  "/",
+  [checkJWT],
+  validateStore,
+  (req: Request, res: Response) => {
+    return createStoreController.handle(req, res);
+  }
+);
 
 export { storeRouter };
