@@ -22,17 +22,20 @@ export class Product {
   @Column("varchar")
   public store_id!: string;
 
+  @Column("decimal")
+  public price!: number;
+
   @Column("boolean", { default: true })
   public active?: boolean;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at?: Date;
 
   @DeleteDateColumn()
-  deleted_at: Date;
+  deleted_at?: Date;
 
   constructor(props: Omit<Product, "id">, id?: string) {
     Object.assign(this, props);

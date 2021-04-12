@@ -29,6 +29,11 @@ export class CreateProductTable1616709650600 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: "price",
+            type: "decimal",
+            isNullable: false,
+          },
+          {
             name: "store_id",
             type: "uuid",
             isNullable: false,

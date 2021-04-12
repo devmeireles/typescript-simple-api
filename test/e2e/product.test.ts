@@ -28,7 +28,8 @@ describe('Testing the product endpoints', () => {
         owner_id: userID,
         store_id: storeID,
         name: 'New Nice T-shirt',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+        price: 10.99
     }
 
     it('It should POST an user', async () => {
