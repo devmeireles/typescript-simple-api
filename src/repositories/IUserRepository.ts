@@ -5,4 +5,6 @@ export interface IUserRepository {
   findByID(id: string): Promise<User>;
   create(User: User): Promise<User>;
   updateOne(id: string, User: User): Promise<User>;
+  findByEmailAndActivation(email: string, activation: string): Promise<User>;
+  activate(id: string): Promise<void>;
 }

@@ -19,6 +19,14 @@ export class PostgresUserRepository implements IUserRepository {
     return user;
   }
 
+  async findByEmailAndActivation(email: string, activation: string): Promise<User> {
+    const user = await getRepository(User).findOne({
+      where: { email, activation },
+    });
+
+    return user;
+  }
+
   async create(user: User): Promise<User> {
     return await getRepository(User).save(user);
   }
@@ -27,5 +35,13 @@ export class PostgresUserRepository implements IUserRepository {
     await getRepository(User).update(id, user);
 
     return user;
+  }
+
+  async activate(id: string): Promise<void> {
+    await getRepository(User).update(id, {
+      active: true
+    });
+
+    return null;
   }
 }
