@@ -37,6 +37,9 @@ export class User {
   @Column("boolean", { default: false })
   public active?: boolean;
 
+  @Column("uuid", { nullable: false, unique: true })
+  public readonly activation?: string;
+
   @CreateDateColumn()
   created_at?: Date;
 
@@ -56,6 +59,8 @@ export class User {
     if (!id) {
       this.id = uuid();
     }
+
+    this.activation = this.id = uuid();
   }
 
   @BeforeInsert()

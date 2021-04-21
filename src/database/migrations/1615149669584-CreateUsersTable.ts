@@ -42,6 +42,11 @@ export class CreateUsersTable1615149669584 implements MigrationInterface {
             default: false,
           },
           {
+            name: "activation",
+            type: "uuid",
+            isUnique: true,
+          },
+          {
             name: "created_at",
             type: "timestamp",
           },

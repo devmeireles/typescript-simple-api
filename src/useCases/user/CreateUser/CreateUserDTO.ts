@@ -7,6 +7,7 @@ export interface ICreateUserRequestDTO {
   active?: boolean;
   language?: string;
   store?: Store;
+  activation?: string;
   created_at?: Date;
   updated_at?: Date;
   deleted_at?: Date;

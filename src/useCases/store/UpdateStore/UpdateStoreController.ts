@@ -1,4 +1,4 @@
-import { Slugfy } from "@src/utils/Slugfy";
+import { Slugfy } from "@utils/Slugfy";
 import { Request, Response } from "express";
 import { UpdateStoreUseCase } from "./UpdateStoreUseCase";
 
