@@ -47,6 +47,12 @@ export class CreateUsersTable1615149669584 implements MigrationInterface {
             isUnique: true,
           },
           {
+            name: "current_token",
+            type: "uuid",
+            isUnique: true,
+            isNullable: true,
+          },
+          {
             name: "created_at",
             type: "timestamp",
           },

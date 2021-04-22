@@ -76,6 +76,15 @@ export class MailtrapMailProvider implements IMailRepository {
           data
         };
         break;
+        case "RESET_PASSWORD":
+          config = {
+            name: process.env.APP_NAME,
+            email: process.env.APP_MAIL_MAIN,
+            subject: `Ownshop - Reset Password`,
+            template: "reset_password.html",
+            data
+          };
+          break;
       default:
         break;
     }
@@ -104,7 +113,7 @@ export class MailtrapMailProvider implements IMailRepository {
       }
         break;
       case "RESET_PASSWORD": {
-        const resetPasswordURL = `localhost:8080/auth/reset-password/${data.activation}`;
+        const resetPasswordURL = `localhost:8080/auth/reset-password/${data.current_token}`;
 
         replacements = {
           user_name: data.name,

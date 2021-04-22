@@ -40,6 +40,9 @@ export class User {
   @Column("uuid", { nullable: false, unique: true })
   public readonly activation?: string;
 
+  @Column("uuid", { nullable: true, unique: true })
+  public current_token?: string;
+
   @CreateDateColumn()
   created_at?: Date;
 
@@ -60,7 +63,7 @@ export class User {
       this.id = uuid();
     }
 
-    this.activation = this.id = uuid();
+    this.activation = uuid();
   }
 
   @BeforeInsert()
