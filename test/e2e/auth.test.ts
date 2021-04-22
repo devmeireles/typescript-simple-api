@@ -4,7 +4,7 @@ describe('Testing the auth endpoints', () => {
     const wrongUUID = '51458c1f-ce6b-483c-aa39-f13d8c3011ff';
 
     const userObj = {
-        name: "Gabriel dos Santos Meireles",
+        name: "Gabriel",
         email: "costumer@flextore.com",
         password: "strongPassw0rd!"
     };
@@ -23,6 +23,10 @@ describe('Testing the auth endpoints', () => {
         email: "costumer@flextore.com",
         password: "12strongPassw0rd!x"
     };
+
+    const askPasswordObj = {
+        email: "costumer@flextore.com",
+    }
 
     describe('POST /login', () => {
         it('It should POST an user', async () => {
@@ -95,5 +99,21 @@ describe('Testing the auth endpoints', () => {
             expect(body).not.toHaveProperty('data');
             expect(body).toHaveProperty('message');
         });
+
+        it("It should ask for a new password", async () => {
+            const { body, status } = await global.testRequest.post('/auth/ask-password').send(askPasswordObj);
+            expect(status).toBe(200);
+            expect(body.success).toEqual(true);
+        });
+
+        // it("It should reset the password", async () => {
+        //     const { body, status } = await global.testRequest.post('/auth/reset-password').send({
+        //         "activation": "950ec0d8-6214-4e1f-9c75-b50f1c0e91fe",
+        //         "email": "elgabo@gmail.com",
+        //         "password": "aReallyStrongPasssw0rxad!"
+        //     });
+        //     expect(status).toBe(200);
+        //     expect(body.success).toEqual(true);
+        // });
     });
 });
