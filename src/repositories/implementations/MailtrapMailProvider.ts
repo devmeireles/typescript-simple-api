@@ -31,7 +31,15 @@ export class MailtrapMailProvider implements IMailRepository {
   async sendCreateAccountMail(message: IMessage, data: User): Promise<void> {
     const type = 'CREATE_ACCOUNT';
     const typeConfig = this.getConfigType(type, data);
-    const template = this.loadHTMLTemplate(typeConfig.template, typeConfig.data);
+    const template = this.loadHTMLTemplate(typeConfig.template, typeConfig.data, type);
+
+    return await this.sendMail(typeConfig, message, template);
+  }
+
+  async sendResetPasswordMail(message: IMessage, data: User): Promise<void> {
+    const type = 'RESET_PASSWORD';
+    const typeConfig = this.getConfigType(type, data);
+    const template = this.loadHTMLTemplate(typeConfig.template, typeConfig.data, type);
 
     return await this.sendMail(typeConfig, message, template);
   }
@@ -75,7 +83,7 @@ export class MailtrapMailProvider implements IMailRepository {
     return config;
   }
 
-  loadHTMLTemplate(templateFile: string, data: any): string {
+  loadHTMLTemplate(templateFile: string, data: any, type: string): string {
     const file = path.join(
       __dirname + "../../../templates/mail/" + templateFile
     );
@@ -83,12 +91,30 @@ export class MailtrapMailProvider implements IMailRepository {
 
     const template = handlebars.compile(loadedHTML);
 
-    const activationURL = `localhost:8080/auth/activation/${data.activation}`;
+    let replacements = {};
 
-    const replacements = {
-      user_name: data.name,
-      activation_url: activationURL,
-    };
+    switch (type) {
+      case "CREATE_ACCOUNT": {
+        const activationURL = `localhost:8080/auth/activation/${data.activation}`;
+
+        replacements = {
+          user_name: data.name,
+          activation_url: activationURL,
+        };
+      }
+        break;
+      case "RESET_PASSWORD": {
+        const resetPasswordURL = `localhost:8080/auth/reset-password/${data.activation}`;
+
+        replacements = {
+          user_name: data.name,
+          reset_password_url: resetPasswordURL,
+        };
+      }
+        break;
+      default:
+        break;
+    }
 
     return template(replacements);
   }

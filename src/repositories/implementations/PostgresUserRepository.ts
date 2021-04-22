@@ -1,5 +1,6 @@
 import { User } from "@entities/User";
-import { IUserRepository } from "@src/repositories/IUserRepository";
+import { IUserRepository } from "@repositories/IUserRepository";
+import { IResetPasswordRequestDTO } from "@useCases/auth/resetPassword/ResetPasswordRequestDTO";
 import { getRepository } from "typeorm";
 
 export class PostgresUserRepository implements IUserRepository {
@@ -40,6 +41,14 @@ export class PostgresUserRepository implements IUserRepository {
   async activate(id: string): Promise<void> {
     await getRepository(User).update(id, {
       active: true
+    });
+
+    return null;
+  }
+
+  async updatePassword(id: string, user: IResetPasswordRequestDTO): Promise<void> {
+    await getRepository(User).update(id, {
+      password: user.password
     });
 
     return null;

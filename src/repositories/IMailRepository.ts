@@ -11,4 +11,5 @@ export interface IMessage {
 
 export interface IMailRepository {
   sendCreateAccountMail(message: IMessage, data: User): Promise<void>;
+  sendResetPasswordMail(message: IMessage, data: User): Promise<void>;
 }
