@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express";
 import { loginController } from "@useCases/auth/login";
-import { activeAccountController } from '@useCases/auth/activateAccount';
-import { resetPasswordController } from '@useCases/auth/resetPassword';
-import { requestResetPasswordController } from '@useCases/auth/requestResetPassword';
+import { activeAccountController } from "@useCases/auth/activateAccount";
+import { resetPasswordController } from "@useCases/auth/resetPassword";
+import { requestResetPasswordController } from "@useCases/auth/requestResetPassword";
 
 const authRouter = Router();
 

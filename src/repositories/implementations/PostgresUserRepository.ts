@@ -20,7 +20,10 @@ export class PostgresUserRepository implements IUserRepository {
     return user;
   }
 
-  async findByEmailAndActivation(email: string, activation: string): Promise<User> {
+  async findByEmailAndActivation(
+    email: string,
+    activation: string
+  ): Promise<User> {
     const user = await getRepository(User).findOne({
       where: { email, activation },
     });
@@ -28,7 +31,10 @@ export class PostgresUserRepository implements IUserRepository {
     return user;
   }
 
-  async findByEmailAndToken(email: string, current_token: string): Promise<User> {
+  async findByEmailAndToken(
+    email: string,
+    current_token: string
+  ): Promise<User> {
     const user = await getRepository(User).findOne({
       where: { email, current_token },
     });
@@ -48,13 +54,16 @@ export class PostgresUserRepository implements IUserRepository {
 
   async activate(id: string): Promise<void> {
     await getRepository(User).update(id, {
-      active: true
+      active: true,
     });
 
     return null;
   }
 
-  async updatePassword(id: string, user: IResetPasswordRequestDTO): Promise<void> {
+  async updatePassword(
+    id: string,
+    user: IResetPasswordRequestDTO
+  ): Promise<void> {
     await getRepository(User).update(id, {
       password: user.password,
       current_token: null,

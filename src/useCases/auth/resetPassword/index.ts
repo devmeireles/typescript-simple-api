@@ -6,6 +6,8 @@ const userRepository = new PostgresUserRepository();
 
 const resetPasswordUseCase = new ResetPasswordUseCase(userRepository);
 
-const resetPasswordController = new ResetPasswordController(resetPasswordUseCase);
+const resetPasswordController = new ResetPasswordController(
+  resetPasswordUseCase
+);
 
 export { resetPasswordUseCase, resetPasswordController };

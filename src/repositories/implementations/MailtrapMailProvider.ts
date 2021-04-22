@@ -29,22 +29,34 @@ export class MailtrapMailProvider implements IMailRepository {
   }
 
   async sendCreateAccountMail(message: IMessage, data: User): Promise<void> {
-    const type = 'CREATE_ACCOUNT';
+    const type = "CREATE_ACCOUNT";
     const typeConfig = this.getConfigType(type, data);
-    const template = this.loadHTMLTemplate(typeConfig.template, typeConfig.data, type);
+    const template = this.loadHTMLTemplate(
+      typeConfig.template,
+      typeConfig.data,
+      type
+    );
 
     return await this.sendMail(typeConfig, message, template);
   }
 
   async sendResetPasswordMail(message: IMessage, data: User): Promise<void> {
-    const type = 'RESET_PASSWORD';
+    const type = "RESET_PASSWORD";
     const typeConfig = this.getConfigType(type, data);
-    const template = this.loadHTMLTemplate(typeConfig.template, typeConfig.data, type);
+    const template = this.loadHTMLTemplate(
+      typeConfig.template,
+      typeConfig.data,
+      type
+    );
 
     return await this.sendMail(typeConfig, message, template);
   }
 
-  async sendMail(typeConfig: IMailConfig, message: IMessage, template: string): Promise<void> {
+  async sendMail(
+    typeConfig: IMailConfig,
+    message: IMessage,
+    template: string
+  ): Promise<void> {
     return await this.transporter.sendMail({
       to: {
         name: message.to.name,
@@ -63,7 +75,7 @@ export class MailtrapMailProvider implements IMailRepository {
     let config: IMailConfig = {
       name: process.env.APP_NAME,
       email: process.env.APP_MAIL_MAIN,
-      data: {}
+      data: {},
     };
 
     switch (type) {
@@ -73,18 +85,18 @@ export class MailtrapMailProvider implements IMailRepository {
           email: process.env.APP_MAIL_MAIN,
           subject: `Ownshop - Welcome ${data.name}`,
           template: "create_account.html",
-          data
+          data,
         };
         break;
-        case "RESET_PASSWORD":
-          config = {
-            name: process.env.APP_NAME,
-            email: process.env.APP_MAIL_MAIN,
-            subject: `Ownshop - Reset Password`,
-            template: "reset_password.html",
-            data
-          };
-          break;
+      case "RESET_PASSWORD":
+        config = {
+          name: process.env.APP_NAME,
+          email: process.env.APP_MAIL_MAIN,
+          subject: `Ownshop - Reset Password`,
+          template: "reset_password.html",
+          data,
+        };
+        break;
       default:
         break;
     }
@@ -103,23 +115,25 @@ export class MailtrapMailProvider implements IMailRepository {
     let replacements = {};
 
     switch (type) {
-      case "CREATE_ACCOUNT": {
-        const activationURL = `localhost:8080/auth/activation/${data.activation}`;
+      case "CREATE_ACCOUNT":
+        {
+          const activationURL = `localhost:8080/auth/activation/${data.activation}`;
 
-        replacements = {
-          user_name: data.name,
-          activation_url: activationURL,
-        };
-      }
+          replacements = {
+            user_name: data.name,
+            activation_url: activationURL,
+          };
+        }
         break;
-      case "RESET_PASSWORD": {
-        const resetPasswordURL = `localhost:8080/auth/reset-password/${data.current_token}`;
+      case "RESET_PASSWORD":
+        {
+          const resetPasswordURL = `localhost:8080/auth/reset-password/${data.current_token}`;
 
-        replacements = {
-          user_name: data.name,
-          reset_password_url: resetPasswordURL,
-        };
-      }
+          replacements = {
+            user_name: data.name,
+            reset_password_url: resetPasswordURL,
+          };
+        }
         break;
       default:
         break;
