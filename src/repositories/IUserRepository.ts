@@ -9,6 +9,6 @@ export interface IUserRepository {
   updateOne(id: string, User: User | IRequestPasswordRequestDTO): Promise<User>;
   updatePassword(id: string, User: IResetPasswordRequestDTO): Promise<void>;
   findByEmailAndActivation(email: string, activation: string): Promise<User>;
+  findByEmailAndToken(email: string, current_token: string): Promise<User>;
   activate(id: string): Promise<void>;
-  // askToken(id: string, token: string): Promise<void>;
 }

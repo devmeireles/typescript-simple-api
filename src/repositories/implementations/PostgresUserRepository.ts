@@ -28,6 +28,14 @@ export class PostgresUserRepository implements IUserRepository {
     return user;
   }
 
+  async findByEmailAndToken(email: string, current_token: string): Promise<User> {
+    const user = await getRepository(User).findOne({
+      where: { email, current_token },
+    });
+
+    return user;
+  }
+
   async create(user: User): Promise<User> {
     return await getRepository(User).save(user);
   }
@@ -48,7 +56,8 @@ export class PostgresUserRepository implements IUserRepository {
 
   async updatePassword(id: string, user: IResetPasswordRequestDTO): Promise<void> {
     await getRepository(User).update(id, {
-      password: user.password
+      password: user.password,
+      current_token: null,
     });
 
     return null;

@@ -8,9 +8,9 @@ export class ResetPasswordUseCase {
     constructor(private userRepository: IUserRepository) { }
 
     async execute(data: IResetPasswordRequestDTO): Promise<ILoggedUser> {
-        const { email } = data;
+        const { email, activation } = data;
 
-        const currentUser = await this.userRepository.findByEmail(email);
+        const currentUser = await this.userRepository.findByEmailAndToken(email, activation);
 
         if (!currentUser) {
             throw new Error("User not found");

@@ -3,5 +3,5 @@ export interface IResetPasswordRequestDTO {
   activation: string;
   email: string;
   password: string;
-  readonly hashPassword? ;
+  readonly hashPassword?;
 }
