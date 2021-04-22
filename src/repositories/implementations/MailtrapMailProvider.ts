@@ -4,12 +4,14 @@ import Mail from "nodemailer/lib/mailer";
 import fs from "fs";
 import path from "path";
 import handlebars from "handlebars";
+import { User } from "@entities/User";
 
 interface IMailConfig {
   name: string;
   email: string;
   subject?: string;
   template?: string;
+  data: any;
 }
 
 export class MailtrapMailProvider implements IMailRepository {
@@ -26,11 +28,16 @@ export class MailtrapMailProvider implements IMailRepository {
     });
   }
 
-  async sendMail(message: IMessage, type: string): Promise<void> {
-    const typeConfig = this.getConfigType(type, message["to"]);
-    const template = this.loadHTMLTemplate(typeConfig.template, message.to);
+  async sendCreateAccountMail(message: IMessage, data: User): Promise<void> {
+    const type = 'CREATE_ACCOUNT';
+    const typeConfig = this.getConfigType(type, data);
+    const template = this.loadHTMLTemplate(typeConfig.template, typeConfig.data);
 
-    await this.transporter.sendMail({
+    return await this.sendMail(typeConfig, message, template);
+  }
+
+  async sendMail(typeConfig: IMailConfig, message: IMessage, template: string): Promise<void> {
+    return await this.transporter.sendMail({
       to: {
         name: message.to.name,
         address: message.to.email,
@@ -44,10 +51,11 @@ export class MailtrapMailProvider implements IMailRepository {
     });
   }
 
-  getConfigType(type: string, receiver: IMessage["to"]): IMailConfig {
+  getConfigType(type: string, data: any): IMailConfig {
     let config: IMailConfig = {
       name: process.env.APP_NAME,
       email: process.env.APP_MAIL_MAIN,
+      data: {}
     };
 
     switch (type) {
@@ -55,8 +63,9 @@ export class MailtrapMailProvider implements IMailRepository {
         config = {
           name: process.env.APP_NAME,
           email: process.env.APP_MAIL_MAIN,
-          subject: `Ownshop - Welcome ${receiver.name}`,
+          subject: `Ownshop - Welcome ${data.name}`,
           template: "create_account.html",
+          data
         };
         break;
       default:
@@ -66,7 +75,7 @@ export class MailtrapMailProvider implements IMailRepository {
     return config;
   }
 
-  loadHTMLTemplate(templateFile: string, receiver: IMessage["to"]): string {
+  loadHTMLTemplate(templateFile: string, data: any): string {
     const file = path.join(
       __dirname + "../../../templates/mail/" + templateFile
     );
@@ -74,8 +83,11 @@ export class MailtrapMailProvider implements IMailRepository {
 
     const template = handlebars.compile(loadedHTML);
 
+    const activationURL = `localhost:8080/auth/activation/${data.activation}`;
+
     const replacements = {
-      user_name: receiver.name,
+      user_name: data.name,
+      activation_url: activationURL,
     };
 
     return template(replacements);

@@ -1,14 +1,14 @@
+import { User } from "@src/entities/User";
+
 interface IAddress {
   email: string;
   name: string;
 }
-
-type IMailType = "CREATE_ACCOUNT" | "RESET_PASSWORD";
 
 export interface IMessage {
   to: IAddress;
 }
 
 export interface IMailRepository {
-  sendMail(message: IMessage, type: IMailType): Promise<void>;
+  sendCreateAccountMail(message: IMessage, data: User): Promise<void>;
 }
