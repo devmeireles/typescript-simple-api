@@ -54,6 +54,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
+    "faker": "^5.5.3",
     "handlebars": "^4.7.7",
     "helmet": "^4.4.1",
     "jsonwebtoken": "^8.5.1",

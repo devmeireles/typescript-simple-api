@@ -1,31 +1,35 @@
-describe('Testing the auth endpoints', () => {
-    let userID: string = null;
-    let activation: string = null;
-    const wrongUUID = '51458c1f-ce6b-483c-aa39-f13d8c3011ff';
+import faker from 'faker';
 
+const wrongActivationCode = faker.datatype.uuid();
+const email = faker.internet.email();
+const password = faker.internet.password();
+let userID: string = null;
+let activation: string = null;
+
+describe('Testing the auth endpoints', () => {
     const userObj = {
-        name: "Gabriel",
-        email: "costumer@flextore.com",
-        password: "strongPassw0rd!"
+        name: faker.name.findName(),
+        email,
+        password,
     };
 
     const loginObj = {
-        email: "costumer@flextore.com",
-        password: "strongPassw0rd!"
+        email,
+        password,
     };
 
     const wrongLoginMailObj = {
-        email: "gabrielx@flextore.com",
-        password: "strongPassw0rd!"
+        email: faker.internet.email(),
+        password: faker.internet.password()
     };
 
     const wrongPasswordObj = {
-        email: "costumer@flextore.com",
-        password: "12strongPassw0rd!x"
+        email: faker.internet.email(),
+        password: faker.internet.password()
     };
 
     const askPasswordObj = {
-        email: "costumer@flextore.com",
+        email
     }
 
     describe('POST /login', () => {
@@ -56,7 +60,7 @@ describe('Testing the auth endpoints', () => {
         it("It shouldn't POST an user activation because the user doesn't exist", async () => {
             const wrongUserActivationObj = {
                 email: wrongPasswordObj.email,
-                activation: wrongUUID
+                activation: wrongActivationCode
             }
 
             const { body, status } = await global.testRequest.post('/auth/activate').send(wrongUserActivationObj);

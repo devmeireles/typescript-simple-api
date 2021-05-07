@@ -1,37 +1,40 @@
+import faker from 'faker';
+
+const wrongUserID = faker.datatype.uuid();
+const wrongToken = faker.datatype.uuid();
+const email = faker.internet.email();
+const password = faker.internet.password();
+let storeID: string = null;
+let userID: string = null;
+let token: string = null;
+
 describe('Testing the store endpoints', () => {
-
-    let storeID: string = null;
-    let userID: string = null;
-    let token: string = null;
-    const wrongUserID = '51458c1f-ce6b-483c-aa39-f13d8c3011ff';
-    const wrongToken = 'wrongTOkenInformati0n';
-
     const userObj = {
-        name: "Gabriel Meireles",
-        email: "newcostumer@flextore.com",
-        password: "strongPassw0rd!"
+        name: faker.name.findName(),
+        email,
+        password,
     };
 
     const loginObj = {
-        email: "newcostumer@flextore.com",
-        password: "strongPassw0rd!"
+        email,
+        password,
     }
 
     const storeObj = {
         owner_id: userID,
-        name: 'New Costumer Shop',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
+        name: faker.company.companyName(),
+        description: faker.lorem.paragraph(),
     }
 
     const wrongStoreObj = {
         owner_id: wrongUserID,
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
+        description: faker.lorem.paragraph(),
     }
 
     const wrongStoreUserObj = {
         owner_id: wrongUserID,
-        name: 'New Shop',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
+        name: faker.company.companyName(),
+        description: faker.lorem.paragraph(),
     }
 
     describe('POST /', () => {
