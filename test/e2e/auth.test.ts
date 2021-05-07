@@ -32,6 +32,24 @@ describe('Testing the auth endpoints', () => {
         email
     }
 
+    const resetPassword = {
+        email,
+        password: faker.internet.password(),
+        activation: faker.datatype.uuid()
+    }
+
+    const wrongResetPasswordByEmail = {
+        email: faker.internet.email(),
+        password,
+        activation: wrongActivationCode
+    }
+
+    const wrongResetPasswordMissingCode = {
+        email,
+        password,
+        activation: wrongActivationCode
+    }
+
     describe('POST /login', () => {
         it('It should POST an user', async () => {
             const { body, status } = await global.testRequest.post('/user').send(userObj);
@@ -110,12 +128,27 @@ describe('Testing the auth endpoints', () => {
             expect(body.success).toEqual(true);
         });
 
+        it("It shouldn't reset the password because the user doesn't exist", async () => {
+            const { body, status } = await global.testRequest.post('/auth/reset-password').send(wrongResetPasswordByEmail);
+
+            expect(status).toBe(400);
+            expect(body.success).toEqual(false);
+            expect(body).not.toHaveProperty('data');
+            expect(body).toHaveProperty('message');
+        });
+
+        it("It shouldn't reset the password because the activation code is wrong", async () => {
+            const { body, status } = await global.testRequest.post('/auth/reset-password').send(wrongResetPasswordMissingCode);
+
+            expect(status).toBe(400);
+            expect(body.success).toEqual(false);
+            expect(body).not.toHaveProperty('data');
+            expect(body).toHaveProperty('message');
+        });
+
         // it("It should reset the password", async () => {
-        //     const { body, status } = await global.testRequest.post('/auth/reset-password').send({
-        //         "activation": "950ec0d8-6214-4e1f-9c75-b50f1c0e91fe",
-        //         "email": "elgabo@gmail.com",
-        //         "password": "aReallyStrongPasssw0rxad!"
-        //     });
+        //     const { body, status } = await global.testRequest.post('/auth/reset-password').send(resetPassword);
+
         //     expect(status).toBe(200);
         //     expect(body.success).toEqual(true);
         // });
