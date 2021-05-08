@@ -6,6 +6,7 @@
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "node dist/server.js",
+    "start:pm2": "pm2 start dist/server.js --name seller-api",
     "start:dev": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
     "test": "jest --projects ./test --runInBand",
     "test:coverage": "jest --projects ./test --runInBand --coverage",
