@@ -20,7 +20,8 @@ module.exports = {
                 '@repositories': './src/repositories',
                 '@useCases': './src/useCases',
                 '@utils': './src/utils',
-                '@interfaces': './src/interfaces'
+                '@interfaces': './src/interfaces',
+                '@middlewares': './src/middlewares'
             }
         }],
         ["@babel/plugin-proposal-decorators", { "legacy": true }],
