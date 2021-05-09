@@ -12,7 +12,8 @@
     "test:coverage": "jest --projects ./test --runInBand --coverage",
     "style:fix": "prettier --write 'src/**/*.ts'",
     "lint:fix": "eslint ./src --ext .ts --fix",
-    "typeorm": "npx ts-node ./node_modules/typeorm/cli.js"
+    "typeorm": "npx ts-node ./node_modules/typeorm/cli.js",
+    "start-create-account-consumer": "npx ts-node consumer.ts"
   },
   "keywords": [],
   "author": "",
@@ -61,8 +62,10 @@
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "nodemailer": "^6.5.0",
+    "npm-run-all": "^4.1.5",
     "pg": "^8.5.1",
     "sqlite3": "^5.0.2",
+    "sqs-consumer": "^5.5.0",
     "typeorm": "^0.2.31",
     "uuidv4": "^6.2.6"
   },

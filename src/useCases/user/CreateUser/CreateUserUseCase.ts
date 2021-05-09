@@ -6,8 +6,8 @@ import { ISQSRepository } from "@src/repositories/ISQSRepository";
 export class CreateUserUseCase {
   constructor(
     private userRepository: IUserRepository,
-    private SQSRepository: ISQSRepository,
-  ) { }
+    private SQSRepository: ISQSRepository
+  ) {}
 
   async execute(data: ICreateUserRequestDTO): Promise<User> {
     const userAlreadyExists = await this.userRepository.findByEmail(data.email);

@@ -1,3 +1,3 @@
 export interface ISQSRepository {
-    sendMessage(message: unknown): Promise<any>;
+  sendMessage(message: unknown): Promise<any>;
 }
