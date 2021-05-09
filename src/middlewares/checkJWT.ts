@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import config from "@config/constants";
+import { consts } from "@config/constants";
 import * as jwt from "jsonwebtoken";
 
 const checkJWT = (
@@ -11,7 +11,7 @@ const checkJWT = (
   let jwtPayload;
 
   try {
-    jwtPayload = jwt.verify(token, config.jwtSecret);
+    jwtPayload = jwt.verify(token, consts.jwtSecret);
     res.locals.jwtPayload = jwtPayload;
   } catch (error) {
     res.status(401).send({
@@ -22,7 +22,7 @@ const checkJWT = (
   }
 
   const { id, email } = jwtPayload;
-  const newToken = jwt.sign({ id, email }, config.jwtSecret, {
+  const newToken = jwt.sign({ id, email }, consts.jwtSecret, {
     expiresIn: "1h",
   });
 

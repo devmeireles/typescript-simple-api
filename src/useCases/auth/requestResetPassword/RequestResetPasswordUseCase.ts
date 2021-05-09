@@ -1,13 +1,14 @@
 import { ILoggedUser } from "@src/interfaces/ILoggedUser";
 import { IUserRepository } from "@src/repositories/IUserRepository";
 import { IRequestPasswordRequestDTO } from "./IRequestPasswordRequestDTO";
-import { IMailRepository } from "@src/repositories/IMailRepository";
+import { ISQSRepository } from "@src/repositories/ISQSRepository";
+import { consts } from "@config/constants";
 import { v4 as uuid } from "uuid";
 
 export class RequestResetPasswordUseCase {
   constructor(
     private userRepository: IUserRepository,
-    private mailRepository: IMailRepository
+    private SQSRepository: ISQSRepository
   ) {}
 
   async execute(data: IRequestPasswordRequestDTO): Promise<ILoggedUser> {
@@ -21,15 +22,17 @@ export class RequestResetPasswordUseCase {
     data.current_token = uuid();
     const user = await this.userRepository.updateOne(currentUser.id, data);
 
-    await this.mailRepository.sendResetPasswordMail(
-      {
-        to: {
-          name: user.name,
-          email: user.email,
-        },
-      },
-      user
-    );
+    await this.SQSRepository.sendMessage(user, consts.MODULES.UPDATE_ACCOUNT);
+
+    // await this.mailRepository.sendResetPasswordMail(
+    //   {
+    //     to: {
+    //       name: user.name,
+    //       email: user.email,
+    //     },
+    //   },
+    //   user
+    // );
 
     const loggedUser: ILoggedUser = {
       name: currentUser.name,

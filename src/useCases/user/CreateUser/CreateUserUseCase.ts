@@ -2,6 +2,7 @@ import { IUserRepository } from "@repositories/IUserRepository";
 import { ICreateUserRequestDTO } from "./CreateUserDTO";
 import { User } from "@entities/User";
 import { ISQSRepository } from "@src/repositories/ISQSRepository";
+import { consts } from "@config/constants";
 
 export class CreateUserUseCase {
   constructor(
@@ -20,7 +21,7 @@ export class CreateUserUseCase {
 
     const newUser = await this.userRepository.create(user);
 
-    await this.SQSRepository.sendMessage(newUser);
+    await this.SQSRepository.sendMessage(newUser, consts.MODULES.CREATE_ACCOUNT);
 
     return newUser;
   }
