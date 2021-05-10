@@ -1,15 +1,12 @@
 import { PostgresUserRepository } from "@repositories/implementations/PostgresUserRepository";
-import { MailtrapMailProvider } from "@repositories/implementations/MailtrapMailProvider";
+import { SQSProvider } from "@repositories/implementations/SQSProvider";
 import { CreateUserController } from "./CreateUserController";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
 const userRepository = new PostgresUserRepository();
-const mailtrapMailProvider = new MailtrapMailProvider();
+const sQSProvider = new SQSProvider();
 
-const createUserUseCase = new CreateUserUseCase(
-  userRepository,
-  mailtrapMailProvider
-);
+const createUserUseCase = new CreateUserUseCase(userRepository, sQSProvider);
 
 const createUserController = new CreateUserController(createUserUseCase);
 

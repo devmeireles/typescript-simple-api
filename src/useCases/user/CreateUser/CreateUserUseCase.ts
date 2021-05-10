@@ -1,12 +1,13 @@
 import { IUserRepository } from "@repositories/IUserRepository";
 import { ICreateUserRequestDTO } from "./CreateUserDTO";
 import { User } from "@entities/User";
-import { IMailRepository } from "@src/repositories/IMailRepository";
+import { ISQSRepository } from "@repositories/ISQSRepository";
+import { consts } from "@config/constants";
 
 export class CreateUserUseCase {
   constructor(
     private userRepository: IUserRepository,
-    private mailRepository: IMailRepository
+    private SQSRepository: ISQSRepository
   ) {}
 
   async execute(data: ICreateUserRequestDTO): Promise<User> {
@@ -20,14 +21,9 @@ export class CreateUserUseCase {
 
     const newUser = await this.userRepository.create(user);
 
-    await this.mailRepository.sendCreateAccountMail(
-      {
-        to: {
-          name: data.name,
-          email: data.email,
-        },
-      },
-      newUser
+    await this.SQSRepository.sendMessage(
+      newUser,
+      consts.MODULES.CREATE_ACCOUNT
     );
 
     return newUser;

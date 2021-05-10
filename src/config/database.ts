@@ -6,7 +6,7 @@ import env from "dotenv";
 
 env.config();
 
-const type: DatabaseType = 'postgres';
+const type: DatabaseType = "postgres";
 const host: string = process.env.DEV_DB_HOST;
 const port: number = parseInt(process.env.DEV_DB_PORT);
 const username: string = process.env.DEV_DB_USERNAME;

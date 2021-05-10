@@ -11,7 +11,7 @@ interface IMailConfig {
   email: string;
   subject?: string;
   template?: string;
-  data: any;
+  data: User;
 }
 
 export class MailtrapMailProvider implements IMailRepository {
@@ -71,11 +71,11 @@ export class MailtrapMailProvider implements IMailRepository {
     });
   }
 
-  getConfigType(type: string, data: any): IMailConfig {
+  getConfigType(type: string, data: User): IMailConfig {
     let config: IMailConfig = {
       name: process.env.APP_NAME,
       email: process.env.APP_MAIL_MAIN,
-      data: {},
+      data,
     };
 
     switch (type) {
@@ -104,7 +104,7 @@ export class MailtrapMailProvider implements IMailRepository {
     return config;
   }
 
-  loadHTMLTemplate(templateFile: string, data: any, type: string): string {
+  loadHTMLTemplate(templateFile: string, data: User, type: string): string {
     const file = path.join(
       __dirname + "../../../templates/mail/" + templateFile
     );

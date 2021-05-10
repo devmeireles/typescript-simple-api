@@ -40,6 +40,9 @@
             ],
             "@middlewares/*": [
                 "./src/middlewares/*"
+            ],
+            "@interfaces/*": [
+                "./src/interfaces/*"
             ]
         },
         "rootDirs": [
