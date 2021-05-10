@@ -5,6 +5,11 @@ import fs from "fs";
 import path from "path";
 import handlebars from "handlebars";
 import { User } from "@entities/User";
+import { AWSError, SES } from "aws-sdk";
+import { SendEmailRequest, SendEmailResponse } from "aws-sdk/clients/ses";
+import env from "dotenv";
+
+env.config();
 
 interface IMailConfig {
   name: string;
@@ -16,6 +21,7 @@ interface IMailConfig {
 
 export class MailtrapMailProvider implements IMailRepository {
   private transporter: Mail;
+  private ses: SES
 
   constructor() {
     this.transporter = nodemailer.createTransport({
@@ -26,6 +32,8 @@ export class MailtrapMailProvider implements IMailRepository {
         pass: "c667f912b0b652",
       },
     });
+
+    this.ses = new SES();
   }
 
   async sendCreateAccountMail(message: IMessage, data: User): Promise<void> {
@@ -37,7 +45,7 @@ export class MailtrapMailProvider implements IMailRepository {
       type
     );
 
-    return await this.sendMail(typeConfig, message, template);
+    return await this.sendFakeMail(typeConfig, message, template);
   }
 
   async sendResetPasswordMail(message: IMessage, data: User): Promise<void> {
@@ -49,10 +57,10 @@ export class MailtrapMailProvider implements IMailRepository {
       type
     );
 
-    return await this.sendMail(typeConfig, message, template);
+    return await this.sendFakeMail(typeConfig, message, template);
   }
 
-  async sendMail(
+  async sendFakeMail(
     typeConfig: IMailConfig,
     message: IMessage,
     template: string
@@ -68,6 +76,38 @@ export class MailtrapMailProvider implements IMailRepository {
       },
       subject: typeConfig.subject,
       html: template,
+    });
+  }
+
+  async sendMail(
+    typeConfig: IMailConfig,
+    message: IMessage,
+    template: string,
+  ): Promise<void> {
+    const params: SendEmailRequest = {
+      Source: typeConfig.email,
+      Destination: {
+        ToAddresses: [
+          message.to.email
+        ]
+      },
+      Message: {
+        Subject: {
+          Data: typeConfig.subject,
+          Charset: 'UTF-8'
+        },
+        Body: {
+          Html: {
+            Data: template,
+            Charset: 'UTF-8'
+          }
+        }
+      }
+    }
+
+    this.ses.sendEmail(params, (err: AWSError, data: SendEmailResponse) => {
+      if (err) console.log(err, err.stack);
+      else console.log(data);
     });
   }
 

@@ -10,5 +10,6 @@ export const consts = {
   AWS: {
     API_VERSION: "2012-11-05",
     REGION: "us-east-1",
+    SENDER_EMAIL: 'ownshop@ownshop.com',
   },
 };
