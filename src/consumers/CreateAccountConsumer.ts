@@ -1,9 +1,10 @@
-import { IMailRepository } from "@src/repositories/IMailRepository";
+import { IUserMessageQueue } from "@interfaces/IUserMessageQueue";
+import { IMailRepository } from "@repositories/IMailRepository";
 
 export class CreateAccountConsumer {
   constructor(private mailRepository: IMailRepository) {}
 
-  async execute(data) {
+  async execute(data: IUserMessageQueue) {
     await this.mailRepository.sendCreateAccountMail(
       {
         to: {

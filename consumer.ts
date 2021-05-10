@@ -2,6 +2,7 @@ import aws from 'aws-sdk';
 import { CreateAccountConsumer } from './src/consumers/CreateAccountConsumer';
 import { ResetPasswordConsumer } from './src/consumers/ResetPasswordConsumer';
 import { MailtrapMailProvider } from "./src/repositories/implementations/MailtrapMailProvider";
+import { IUserMessageQueue } from './src/interfaces/IUserMessageQueue';
 import { consts } from './src/config/constants';
 import { Consumer } from 'sqs-consumer';
 
@@ -17,7 +18,7 @@ const resetPasswordConsumer = new ResetPasswordConsumer(mailtrapMailProvider);
 const app = Consumer.create({
     queueUrl: queueUrl,
     handleMessage: async (message) => {
-        const data = JSON.parse(message.Body)
+        const data: IUserMessageQueue = JSON.parse(message.Body)
 
         switch (data.message_type) {
             case consts.MODULES.CREATE_ACCOUNT:

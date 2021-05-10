@@ -1,7 +1,7 @@
 import { IUserRepository } from "@repositories/IUserRepository";
 import { ICreateUserRequestDTO } from "./CreateUserDTO";
 import { User } from "@entities/User";
-import { ISQSRepository } from "@src/repositories/ISQSRepository";
+import { ISQSRepository } from "@repositories/ISQSRepository";
 import { consts } from "@config/constants";
 
 export class CreateUserUseCase {

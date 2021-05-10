@@ -1,5 +1,5 @@
-import { ILoggedUser } from "@src/interfaces/ILoggedUser";
-import { IUserRepository } from "@src/repositories/IUserRepository";
+import { ILoggedUser } from "@interfaces/ILoggedUser";
+import { IUserRepository } from "@repositories/IUserRepository";
 import { AuthToken } from "@utils/AuthToken";
 
 export class LoginUseCase {

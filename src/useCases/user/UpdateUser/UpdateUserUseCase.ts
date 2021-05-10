@@ -1,5 +1,5 @@
 import { User } from "@entities/User";
-import { IUserRepository } from "@src/repositories/IUserRepository";
+import { IUserRepository } from "@repositories/IUserRepository";
 import { IUpdateUserRequestDTO } from "./UpdateUserRequestDTO";
 
 export class UpdateUserUseCase {

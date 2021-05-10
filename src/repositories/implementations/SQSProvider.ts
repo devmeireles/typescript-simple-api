@@ -1,5 +1,5 @@
 import { consts } from "@config/constants";
-import { IUserMessageQueue } from "@src/interfaces/IUserMessageQueue";
+import { IUserMessageQueue } from "@interfaces/IUserMessageQueue";
 import aws, { AWSError } from "aws-sdk";
 import { SendMessageResult } from "aws-sdk/clients/sqs";
 import { PromiseResult } from "aws-sdk/lib/request";

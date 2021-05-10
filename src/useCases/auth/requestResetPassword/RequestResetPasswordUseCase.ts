@@ -1,7 +1,7 @@
-import { ILoggedUser } from "@src/interfaces/ILoggedUser";
-import { IUserRepository } from "@src/repositories/IUserRepository";
+import { ILoggedUser } from "@interfaces/ILoggedUser";
+import { IUserRepository } from "@repositories/IUserRepository";
 import { IRequestPasswordRequestDTO } from "./IRequestPasswordRequestDTO";
-import { ISQSRepository } from "@src/repositories/ISQSRepository";
+import { ISQSRepository } from "@repositories/ISQSRepository";
 import { consts } from "@config/constants";
 import { v4 as uuid } from "uuid";
 
