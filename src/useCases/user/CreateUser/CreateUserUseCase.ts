@@ -3,6 +3,7 @@ import { ICreateUserRequestDTO } from "./CreateUserDTO";
 import { User } from "@entities/User";
 import { ISQSRepository } from "@repositories/ISQSRepository";
 import { consts } from "@config/constants";
+import { ICreatedUser } from "@interfaces/ICreatedUser";
 
 export class CreateUserUseCase {
   constructor(
@@ -10,7 +11,7 @@ export class CreateUserUseCase {
     private SQSRepository: ISQSRepository
   ) {}
 
-  async execute(data: ICreateUserRequestDTO): Promise<User> {
+  async execute(data: ICreateUserRequestDTO): Promise<ICreatedUser> {
     const userAlreadyExists = await this.userRepository.findByEmail(data.email);
 
     if (userAlreadyExists) {
