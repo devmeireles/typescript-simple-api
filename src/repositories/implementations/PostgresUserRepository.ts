@@ -1,5 +1,6 @@
 import { User } from "@entities/User";
 import { IUserRepository } from "@repositories/IUserRepository";
+import { ICreatedUser } from "@interfaces/ICreatedUser";
 import { IResetPasswordRequestDTO } from "@useCases/auth/resetPassword/ResetPasswordRequestDTO";
 import { getRepository } from "typeorm";
 
@@ -42,8 +43,17 @@ export class PostgresUserRepository implements IUserRepository {
     return user;
   }
 
-  async create(user: User): Promise<User> {
-    return await getRepository(User).save(user);
+  async create(user: User): Promise<ICreatedUser> {
+    const saved = await getRepository(User).save(user);
+
+    const newUser: ICreatedUser = {
+      id: saved.id,
+      name: saved.name,
+      email: saved.email,
+      activation: saved.activation,
+    };
+
+    return newUser;
   }
 
   async updateOne(id: string, user: User): Promise<User> {
