@@ -1,9 +1,10 @@
 import { IMailRepository } from "@repositories/IMailRepository";
+import { IUserMessageQueue } from "@interfaces/IUserMessageQueue";
 
 export class ResetPasswordConsumer {
   constructor(private mailRepository: IMailRepository) {}
 
-  async execute(data) {
+  async execute(data: IUserMessageQueue): Promise<void> {
     await this.mailRepository.sendResetPasswordMail(
       {
         to: {
