@@ -1,17 +1,23 @@
-import aws, { AWSError, Request } from "aws-sdk";
+import { consts } from "@config/constants";
+import { IUserMessageQueue } from "@src/interfaces/IUserMessageQueue";
+import aws, { AWSError } from "aws-sdk";
 import { SendMessageResult } from "aws-sdk/clients/sqs";
+import { PromiseResult } from "aws-sdk/lib/request";
 import { ISQSRepository } from "../ISQSRepository";
 
 export class SQSProvider implements ISQSRepository {
-  async sendMessage(message: any, type: string): Promise<any> {
-    aws.config.update({ region: "us-east-1" });
-    const sqs = new aws.SQS({ apiVersion: "2012-11-05" });
+  async sendMessage(
+    message: IUserMessageQueue,
+    type: string
+  ): Promise<PromiseResult<SendMessageResult, AWSError>> {
+    aws.config.update({ region: consts.AWS.REGION });
+    const sqs = new aws.SQS({ apiVersion: consts.AWS.API_VERSION });
 
     message.message_type = type;
 
     const params = {
       MessageBody: JSON.stringify(message),
-      QueueUrl: `http://localhost:4566/000000000000/createAccount`,
+      QueueUrl: consts.QUEUES.EMAIL,
     };
 
     try {

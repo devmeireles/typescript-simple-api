@@ -21,7 +21,10 @@ export class CreateUserUseCase {
 
     const newUser = await this.userRepository.create(user);
 
-    await this.SQSRepository.sendMessage(newUser, consts.MODULES.CREATE_ACCOUNT);
+    await this.SQSRepository.sendMessage(
+      newUser,
+      consts.MODULES.CREATE_ACCOUNT
+    );
 
     return newUser;
   }

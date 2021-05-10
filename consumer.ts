@@ -7,8 +7,8 @@ import { Consumer } from 'sqs-consumer';
 
 
 
-aws.config.update({ region: 'us-east-1' });
-const queueUrl = `http://localhost:4566/000000000000/createAccount`;
+aws.config.update({ region: consts.AWS.REGION });
+const queueUrl = consts.QUEUES.EMAIL;
 
 const mailtrapMailProvider = new MailtrapMailProvider();
 const createAccountConsumer = new CreateAccountConsumer(mailtrapMailProvider);
@@ -18,8 +18,6 @@ const app = Consumer.create({
     queueUrl: queueUrl,
     handleMessage: async (message) => {
         const data = JSON.parse(message.Body)
-
-        console.log(data.message_type);
 
         switch (data.message_type) {
             case consts.MODULES.CREATE_ACCOUNT:

@@ -24,16 +24,6 @@ export class RequestResetPasswordUseCase {
 
     await this.SQSRepository.sendMessage(user, consts.MODULES.UPDATE_ACCOUNT);
 
-    // await this.mailRepository.sendResetPasswordMail(
-    //   {
-    //     to: {
-    //       name: user.name,
-    //       email: user.email,
-    //     },
-    //   },
-    //   user
-    // );
-
     const loggedUser: ILoggedUser = {
       name: currentUser.name,
       id: currentUser.id,
