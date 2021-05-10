@@ -10,9 +10,9 @@ services:
       - "4571:4571"
       - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
     environment:
-      - SERVICES=${SERVICES- }
+      - SERVICES=sqs,s3,ses
       - DEBUG=${DEBUG- }
-      - DATA_DIR=/tmp/localstack/data
+      - DATA_DIR=${DATA_DIR- }
       - PORT_WEB_UI=${PORT_WEB_UI- }
       - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR- }
       - KINESIS_ERROR_PROBABILITY=${KINESIS_ERROR_PROBABILITY- }
