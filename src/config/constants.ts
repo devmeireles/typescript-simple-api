@@ -16,4 +16,8 @@ export const consts = {
     ACCESS_KEY: "temp-key",
     SECRET_KEY: "temp-secret",
   },
+  COMMONS: {
+    MAX_FILE_SIZE: 1000000, //1mb
+    ACCEPTED_FILES: ["jpg, jpeg", "png"],
+  },
 };
