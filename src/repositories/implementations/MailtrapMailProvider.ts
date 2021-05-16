@@ -21,7 +21,7 @@ interface IMailConfig {
 
 export class MailtrapMailProvider implements IMailRepository {
   private transporter: Mail;
-  private ses: SES
+  private ses: SES;
 
   constructor() {
     this.transporter = nodemailer.createTransport({
@@ -82,28 +82,26 @@ export class MailtrapMailProvider implements IMailRepository {
   async sendMail(
     typeConfig: IMailConfig,
     message: IMessage,
-    template: string,
+    template: string
   ): Promise<void> {
     const params: SendEmailRequest = {
       Source: typeConfig.email,
       Destination: {
-        ToAddresses: [
-          message.to.email
-        ]
+        ToAddresses: [message.to.email],
       },
       Message: {
         Subject: {
           Data: typeConfig.subject,
-          Charset: 'UTF-8'
+          Charset: "UTF-8",
         },
         Body: {
           Html: {
             Data: template,
-            Charset: 'UTF-8'
-          }
-        }
-      }
-    }
+            Charset: "UTF-8",
+          },
+        },
+      },
+    };
 
     this.ses.sendEmail(params, (err: AWSError, data: SendEmailResponse) => {
       if (err) console.log(err, err.stack);

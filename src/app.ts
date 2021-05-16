@@ -31,6 +31,7 @@ export class App {
     this.app.use("/auth", routes.authRouter);
     this.app.use("/product", routes.productRouter);
     this.app.use("/store", routes.storeRouter);
+    this.app.use("/file", routes.fileRouter);
   }
 }
 
