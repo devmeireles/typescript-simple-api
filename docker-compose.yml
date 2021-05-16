@@ -8,16 +8,19 @@ services:
     ports:
       - "4566:4566"
       - "4571:4571"
-      - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
+      - "${PORT_WEB_UI-3030}:${PORT_WEB_UI-3030}"
     environment:
       - SERVICES=sqs,s3,ses
       - DEBUG=${DEBUG- }
       - DATA_DIR=${DATA_DIR- }
       - PORT_WEB_UI=${PORT_WEB_UI- }
+      - START_WEB=1
       - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR- }
       - KINESIS_ERROR_PROBABILITY=${KINESIS_ERROR_PROBABILITY- }
       - DOCKER_HOST=unix:///var/run/docker.sock
       - HOST_TMP_FOLDER=${TMPDIR}
+      - DEFAULT_REGION=eu-west-1
     volumes:
       - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./aws-start.sh:/docker-entrypoint-initaws.d/aws-start.sh"
