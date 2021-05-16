@@ -11,5 +11,9 @@ export const consts = {
     API_VERSION: "2012-11-05",
     REGION: "us-east-1",
     SENDER_EMAIL: 'ownshop@ownshop.com',
+    BUCKET_NAME: 'seller',
+    BUCKET_ADDRESS: 'http://localhost:4566',
+    ACCESS_KEY: 'temp-key',
+    SECRET_KEY: 'temp-secret'
   },
 };
