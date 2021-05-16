@@ -9,5 +9,5 @@ export const routes = {
   productRouter,
   authRouter,
   storeRouter,
-  fileRouter
+  fileRouter,
 };

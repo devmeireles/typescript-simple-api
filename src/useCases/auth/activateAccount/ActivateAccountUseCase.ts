@@ -2,9 +2,7 @@ import { ILoggedUser } from "@interfaces/ILoggedUser";
 import { IUserRepository } from "@repositories/IUserRepository";
 
 export class ActivateAccountUseCase {
-  constructor(
-    private userRepository: IUserRepository
-  ) { }
+  constructor(private userRepository: IUserRepository) {}
 
   async execute(email: string, activation: string): Promise<ILoggedUser> {
     const currentUser = await this.userRepository.findByEmailAndActivation(
