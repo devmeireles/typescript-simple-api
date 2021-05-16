@@ -5,7 +5,7 @@ export const consts = {
     UPDATE_ACCOUNT: "update_account",
   },
   QUEUES: {
-    EMAIL: "http://localhost:4566/000000000000/createAccount",
+    EMAIL: "http://localhost:4566/000000000000/accountQueue",
   },
   AWS: {
     API_VERSION: "2012-11-05",
