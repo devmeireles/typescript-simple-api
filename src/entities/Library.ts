@@ -6,7 +6,7 @@ import {
   DeleteDateColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { uuid } from "uuidv4";
+import { v4 as uuid } from "uuid";
 
 @Entity("library")
 export class Library {
