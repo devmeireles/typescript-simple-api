@@ -1,5 +1,5 @@
 import { ILoggedUser } from "@interfaces/ILoggedUser";
-import { IUserRepository } from "@repositories/IUserRepository";
+import { IUserRepository } from "@repositories/index";
 import { IResetPasswordRequestDTO } from "./ResetPasswordRequestDTO";
 import bcrypt from "bcryptjs";
 

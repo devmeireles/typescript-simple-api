@@ -1,5 +1,5 @@
 import { User } from "@entities/User";
-import { IUserRepository } from "@repositories/IUserRepository";
+import { IUserRepository } from "@repositories/index";
 import { ICreatedUser } from "@interfaces/ICreatedUser";
 import { IResetPasswordRequestDTO } from "@useCases/auth/resetPassword/ResetPasswordRequestDTO";
 import { getRepository } from "typeorm";

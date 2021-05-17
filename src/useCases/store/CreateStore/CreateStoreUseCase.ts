@@ -1,6 +1,5 @@
 import { Store } from "@entities/Store";
-import { IStoreRepository } from "@repositories/IStoreRepository";
-import { IUserRepository } from "@repositories/IUserRepository";
+import { IStoreRepository, IUserRepository } from "@repositories/index";
 import { ICreateStoreDTO } from "./CreateStoreDTO";
 
 export class CreateStoreUseCase {

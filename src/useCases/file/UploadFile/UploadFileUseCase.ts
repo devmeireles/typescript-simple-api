@@ -1,7 +1,6 @@
 import { File } from "@interfaces/IFile";
-import { IS3Repository } from "@repositories/IS3Repository";
 import { Library } from "@entities/Library";
-import { ILibraryRepository } from "@repositories/ILibraryRepository";
+import { ILibraryRepository, IS3Repository } from "@repositories/index";
 import { consts } from "@config/constants";
 
 export class UploadFileUseCase {

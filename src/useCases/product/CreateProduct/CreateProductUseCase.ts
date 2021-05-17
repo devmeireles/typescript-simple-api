@@ -1,6 +1,4 @@
-import { IStoreRepository } from "@repositories/IStoreRepository";
-import { IUserRepository } from "@repositories/IUserRepository";
-import { IProductRepository } from "@repositories/IProductRepository";
+import { IStoreRepository, IUserRepository, IProductRepository } from "@repositories/index";
 import { ICreateProductDTO } from "./CreateProductDTO";
 import { Product } from "@entities/Product";
 
@@ -9,7 +7,7 @@ export class CreateProductUseCase {
     private storeRepository: IStoreRepository,
     private userRepository: IUserRepository,
     private productRepository: IProductRepository
-  ) {}
+  ) { }
 
   async execute(data: ICreateProductDTO): Promise<Product> {
     const { owner_id } = data;

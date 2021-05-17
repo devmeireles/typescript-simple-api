@@ -1,4 +1,4 @@
-import { IStoreRepository } from "@repositories/IStoreRepository";
+import { IStoreRepository } from "@repositories/index";
 import { Store } from "@entities/Store";
 import { IUpdateStoreDTO } from "./UpdateStoreDTO";
 

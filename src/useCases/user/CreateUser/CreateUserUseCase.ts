@@ -1,7 +1,6 @@
-import { IUserRepository } from "@repositories/IUserRepository";
+import { IUserRepository, ISQSRepository } from "@repositories/index";
 import { ICreateUserRequestDTO } from "./CreateUserDTO";
 import { User } from "@entities/User";
-import { ISQSRepository } from "@repositories/ISQSRepository";
 import { consts } from "@config/constants";
 import { ICreatedUser } from "@interfaces/ICreatedUser";
 
