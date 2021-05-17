@@ -1,4 +1,4 @@
-import { PostgresUserRepository } from "@repositories/implementations/PostgresUserRepository";
+import { PostgresUserRepository } from "@repositories/implementations";
 import { ResetPasswordController } from "./ResetPasswordController";
 import { ResetPasswordUseCase } from "./ResetPasswordUseCase";
 

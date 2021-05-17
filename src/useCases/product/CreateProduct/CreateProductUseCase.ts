@@ -1,6 +1,8 @@
-import { IStoreRepository } from "@repositories/IStoreRepository";
-import { IUserRepository } from "@repositories/IUserRepository";
-import { IProductRepository } from "@repositories/IProductRepository";
+import {
+  IStoreRepository,
+  IUserRepository,
+  IProductRepository,
+} from "@repositories/index";
 import { ICreateProductDTO } from "./CreateProductDTO";
 import { Product } from "@entities/Product";
 

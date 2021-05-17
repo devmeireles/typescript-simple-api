@@ -1,4 +1,4 @@
-import { IMailRepository } from "@repositories/IMailRepository";
+import { IMailRepository } from "@repositories/index";
 import { IUserMessageQueue } from "@interfaces/IUserMessageQueue";
 
 export class ResetPasswordConsumer {

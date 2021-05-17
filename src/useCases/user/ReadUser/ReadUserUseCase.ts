@@ -1,5 +1,5 @@
 import { User } from "@entities/User";
-import { IUserRepository } from "@repositories/IUserRepository";
+import { IUserRepository } from "@repositories/index";
 
 export class ReadUserUseCase {
   constructor(private userRepository: IUserRepository) {}
