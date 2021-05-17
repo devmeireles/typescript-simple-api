@@ -1,4 +1,4 @@
-import { PostgresUserRepository } from "@repositories/implementations/PostgresUserRepository";
+import { PostgresUserRepository } from "@repositories/implementations";
 import { ActiveAccountController } from "./ActiveAccountController";
 import { ActivateAccountUseCase } from "./ActivateAccountUseCase";
 

@@ -1,5 +1,4 @@
-import { S3Provider } from "@repositories/implementations/S3Provider";
-import { PostgresLibraryRepository } from "@repositories/implementations/PostgresLibraryRepository";
+import { S3Provider, PostgresLibraryRepository } from "@repositories/implementations";
 import { UploadFileUseCase } from "./UploadFileUseCase";
 import { UploadFileController } from "./UploadFileController";
 

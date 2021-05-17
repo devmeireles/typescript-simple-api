@@ -1,5 +1,4 @@
-import { PostgresUserRepository } from "@repositories/implementations/PostgresUserRepository";
-import { SQSProvider } from "@repositories/implementations/SQSProvider";
+import { PostgresUserRepository, SQSProvider } from "@repositories/implementations";
 import { RequestResetPasswordController } from "./RequestResetPasswordController";
 import { RequestResetPasswordUseCase } from "./RequestResetPasswordUseCase";
 
