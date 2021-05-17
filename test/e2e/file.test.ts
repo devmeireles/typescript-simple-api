@@ -25,6 +25,8 @@ describe('Testing the file endpoints', () => {
     }
 
     const filePath = `${__dirname}/../assets/test-image.jpg`;
+    const wrongFilePath = `${__dirname}/../assets/sample.pdf`;
+    const largeFile = `${__dirname}/../assets/too-large-file.jpg`;
 
     describe('POST /', () => {
         it('It should POST an user', async () => {
@@ -62,6 +64,30 @@ describe('Testing the file endpoints', () => {
         expect(body.data).toHaveProperty('name');
         expect(body.data).toHaveProperty('owner_id');
         expect(body.data).toHaveProperty('id');
+    });
+
+    it("It shouldn't POST a file because the format is wrong", async () => {
+        const { body, status } = await global.testRequest.post('/file/upload')
+            .set('content-type', 'multipart/form-data')
+            .set({ 'authorization': token })
+            .field('owner', userID)
+            .attach('file', wrongFilePath);
+
+        expect(status).toBe(401);
+        expect(body.success).toEqual(false);
+        expect(body).not.toHaveProperty('data');
+    });
+
+    it("It shouldn't POST a file because the size is too large", async () => {
+        const { body, status } = await global.testRequest.post('/file/upload')
+            .set('content-type', 'multipart/form-data')
+            .set({ 'authorization': token })
+            .field('owner', userID)
+            .attach('file', largeFile);
+
+        expect(status).toBe(401);
+        expect(body.success).toEqual(false);
+        expect(body).not.toHaveProperty('data');
     });
 
     it("It shouldn't POST a file because the file is missing", async () => {

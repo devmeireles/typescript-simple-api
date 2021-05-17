@@ -1,6 +1,7 @@
 import { Product } from "@entities/Product";
 import { Store } from "@entities/Store";
 import { User } from "@entities/User";
+import { Library } from "@entities/Library";
 import { ConnectionOptions, DatabaseType } from "typeorm";
 import env from "dotenv";
 
@@ -23,7 +24,7 @@ const databaseConfig: ConnectionOptions = {
   database,
   synchronize: true,
   logging: false,
-  entities: [User, Store, Product],
+  entities: [User, Store, Product, Library],
   migrations: ["src/database/migrations/**/*.ts"],
   cli: {
     migrationsDir: "src/database/migrations",
