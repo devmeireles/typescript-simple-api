@@ -10,7 +10,7 @@ export const consts = {
   AWS: {
     API_VERSION: "2012-11-05",
     REGION: "us-east-1",
-    SENDER_EMAIL: "ownshop@ownshop.com",
+    SENDER_EMAIL: "mailer@address.com",
     BUCKET_NAME: "seller",
     BUCKET_ADDRESS: "http://localhost:4566",
     ACCESS_KEY: "temp-key",
@@ -24,4 +24,10 @@ export const consts = {
   ASSET_TYPE: {
     STORE_AVATAR: "STORE_AVATAR",
   },
+  EMAIL: {
+    SMTP_ADDRESS: 'smtp.mailtrap.io',
+    USER: '',
+    PASSWORD: '',
+    PORT: 2525
+  }
 };

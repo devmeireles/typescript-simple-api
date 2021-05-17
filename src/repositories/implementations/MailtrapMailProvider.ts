@@ -8,6 +8,7 @@ import { User } from "@entities/User";
 import { AWSError, SES } from "aws-sdk";
 import { SendEmailRequest, SendEmailResponse } from "aws-sdk/clients/ses";
 import env from "dotenv";
+import { consts } from "@src/config/constants";
 
 env.config();
 
@@ -25,11 +26,11 @@ export class MailtrapMailProvider implements IMailRepository {
 
   constructor() {
     this.transporter = nodemailer.createTransport({
-      host: "smtp.mailtrap.io",
-      port: 2525,
+      host: consts.EMAIL.SMTP_ADDRESS,
+      port: consts.EMAIL.PORT,
       auth: {
-        user: "ab9923e8f2fbb7",
-        pass: "c667f912b0b652",
+        user: consts.EMAIL.USER,
+        pass: consts.EMAIL.PASSWORD,
       },
     });
 
@@ -121,7 +122,7 @@ export class MailtrapMailProvider implements IMailRepository {
         config = {
           name: process.env.APP_NAME,
           email: process.env.APP_MAIL_MAIN,
-          subject: `Ownshop - Welcome ${data.name}`,
+          subject: `Shop - Welcome ${data.name}`,
           template: "create_account.html",
           data,
         };
@@ -130,7 +131,7 @@ export class MailtrapMailProvider implements IMailRepository {
         config = {
           name: process.env.APP_NAME,
           email: process.env.APP_MAIL_MAIN,
-          subject: `Ownshop - Reset Password`,
+          subject: `Shop - Reset Password`,
           template: "reset_password.html",
           data,
         };
