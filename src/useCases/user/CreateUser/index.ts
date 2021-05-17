@@ -1,4 +1,7 @@
-import { PostgresUserRepository, SQSProvider } from "@repositories/implementations";
+import {
+  PostgresUserRepository,
+  SQSProvider,
+} from "@repositories/implementations";
 import { CreateUserController } from "./CreateUserController";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 

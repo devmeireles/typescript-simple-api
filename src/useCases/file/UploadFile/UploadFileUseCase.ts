@@ -7,14 +7,17 @@ export class UploadFileUseCase {
   constructor(
     private S3Repository: IS3Repository,
     private libraryRepository: ILibraryRepository
-  ) { }
+  ) {}
 
   async execute(file: File, owner: string): Promise<Library> {
     const fileData = await this.S3Repository.uploadFile(file, owner);
 
     const libSize = await this.libraryRepository.getLibSize(owner);
 
-    if (libSize > consts.AWS.MAX_BUCKET_SIZE || (fileData.size + libSize) > consts.AWS.MAX_BUCKET_SIZE) {
+    if (
+      libSize > consts.AWS.MAX_BUCKET_SIZE ||
+      fileData.size + libSize > consts.AWS.MAX_BUCKET_SIZE
+    ) {
       throw new Error("Library limit exceeded.");
     }
 

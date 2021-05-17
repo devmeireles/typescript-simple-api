@@ -1,4 +1,7 @@
-import { PostgresStoreRepository, PostgresUserRepository } from "@repositories/implementations";
+import {
+  PostgresStoreRepository,
+  PostgresUserRepository,
+} from "@repositories/implementations";
 import { CreateStoreController } from "./CreateStoreController";
 import { CreateStoreUseCase } from "./CreateStoreUseCase";
 

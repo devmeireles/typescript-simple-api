@@ -15,13 +15,13 @@ export const consts = {
     BUCKET_ADDRESS: "http://localhost:4566",
     ACCESS_KEY: "temp-key",
     SECRET_KEY: "temp-secret",
-    MAX_BUCKET_SIZE: 100000000 //100mb
+    MAX_BUCKET_SIZE: 100000000, //100mb
   },
   COMMONS: {
     MAX_FILE_SIZE: 1000000, //1mb
     ACCEPTED_FILES: ["jpg", "jpeg", "png"],
   },
   ASSET_TYPE: {
-    STORE_AVATAR: 'STORE_AVATAR'
-  }
+    STORE_AVATAR: "STORE_AVATAR",
+  },
 };
